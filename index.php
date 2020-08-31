@@ -8,10 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Live with smartness</title>
-
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="assets/icons/favicon.png" type="favicon">
+    <title>Rent-Ad | Live with smartness | Better Living For All In Few Clicks</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -57,6 +54,118 @@
         </div>
     </nav>
     <!-- Navbar end -->
+
+    <!--  Carousel      -->
+    <section id="showcase">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="9000">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item carousel-image-1 active">
+                    <div class="container">
+                        <div
+                            class="carousel-caption d-none d-sm-block text-right text-secondary mb-5 bg-trans p-5 rounded">
+                            <h1 class="display-3 animated zoomIn slow text-light">Best Rent Property Selling</h1>
+                            <p class="lead animated zoomIn delay-2s text-light">Rent-House Adviser offers a one-stop
+                                destination
+                                for all Property needs</p>
+                            <a href="#" class="btn btn-danger btn-lg animated zoomIn delay-3s">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item carousel-image-2">
+                    <div class="container">
+                        <div class="carousel-caption d-none d-sm-block text-secondary mb-5 bg-trans p-5 rounded">
+                            <h1 class="display-3 animated zoomIn slow text-light">Get out and stretch your imagination
+                            </h1>
+                            <p class="lead animated zoomIn delay-2s text-light">Plan a different kind of getaway to
+                                uncover the
+                                hidden gems near you.
+                            </p>
+                            <a href="#" class="btn btn-primary btn-lg animated zoomIn delay-3s">Read More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="carousel-item carousel-image-3">
+                    <div class="container">
+                        <div
+                            class="carousel-caption d-none d-sm-block text-left text-secondary mb-5 bg-trans p-5 rounded">
+                            <h1 class="display-3 animated zoomIn slow text-light">Let’s find a home that’s perfect for
+                                you.℠
+                            </h1>
+                            <p class="lead animated zoomIn delay-2s text-light">Search confidently with your trusted
+                                source of homes for sale or rent
+                            </p>
+                            <a href="#" class="btn btn-success btn-lg animated zoomIn delay-3s">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
+                <span class="carousel-control-prev-icon"></span>
+            </a>
+
+            <a href="#myCarousel" data-slide="next" class="carousel-control-next">
+                <span class="carousel-control-next-icon"></span>
+            </a>
+        </div>
+    </section>
+    <!--  Carousel End  -->
+
+    <!-- Footer -->
+    <footer class="bg-dark">
+        <div class="container">
+            <div class="row pt-5 pb-2">
+                <div class="col-md-4 my-3">
+                    <div class="container text-secondary">
+                        <h4>Site Map</h4>
+                        <ul class="list-unstyled px-3">
+                            <li><a class="text-decoration-none text-secondary" href="index.php">Home</a>
+                            </li>
+                            <li><a class="text-decoration-none text-secondary" href="properties.php">Property</a></li>
+                            <li><a class="text-decoration-none text-secondary" href="services.php">Services</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 my-3">
+                    <div class="container text-secondary">
+                        <h4>Socialmedia Links</h4>
+                        <ul class="list-unstyled px-3">
+                            <li class="text-secondary"><i class="fa fa-twitter pr-2 text-secondary"></i>Twitter</li>
+                            <li class="text-secondary"><i class="fa fa-instagram pr-2 text-secondary"></i>Instagram</li>
+                            <li class="text-secondary"><i class="fa fa-facebook pr-2 text-secondary"></i>Facebook</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4 my-3">
+                    <div class="container text-secondary">
+                        <h4>About Our Team</h4>
+                        <ul class="list-unstyled px-3">
+                            <li><span class="span-strong text-secondary">Darshan Hulswar </span>Lead Developer</li>
+                            <li><span class="span-strong text-secondary">Vinayak</span> Team-cordinator</li>
+                            <li></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="footer text-center">
+                        <p class="text-white span-strong text-secondary">Copyright &copy; All rights reserved | Site
+                            Desinged and
+                            Developed by
+                            Darshan Hulswar and Vinayak Ravi with <i class="fa fa-heart text-danger"></i></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer End -->
 
     <!-- Script Tags -->
     <?php include 'inc/scripts.inc.php' ?>

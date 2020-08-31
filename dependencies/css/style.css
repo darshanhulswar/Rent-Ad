@@ -79,18 +79,22 @@
 }
 
 .carousel-image-1 {
-    background: url('../img/image1.jpeg');
+    background: url('../../assets/img/image1.jpeg');
     background-size: cover;
 }
 
 .carousel-image-2 {
-    background: url('../img/image2.jpeg');
+    background: url('../../assets/img/image2.jpeg');
     background-size: cover;
 }
 
 .carousel-image-3 {
-    background: url('../img/image3.jpeg');
+    background: url('../../assets/img/image3.jpeg');
     background-size: cover;
+}
+
+.bg-trans {
+    background: rgba(0,0,0,0.5);
 }
 /*#################### End #####################################################################*/
 
@@ -113,7 +117,7 @@
 /*####################### End ##################*/
 
 #register {
-    background: url('../img/img20.jpeg');
+    background: url('../../assets/img/img20.jpeg');
     background-size: cover;
     background-attachment: fixed;
 }
@@ -140,7 +144,7 @@
 }
 
 #features {
-    background: url('../img/img30.jpg');
+    background: url('../../assets/img/img30.jpg');
     background-size: cover;
     background-attachment:  fixed;
 }
@@ -154,14 +158,14 @@
 }
 
 #search-section {
-    background: url('../img/img22.jpeg');
+    background: url('../../assets/img/img22.jpeg');
     background-size: cover;
     background-attachment: fixed;
     
 }
 
 #aboutus {
-    background: url(../img/img16.jpeg);
+    background: url('../../assets/img/img16.jpeg');
     background-size: cover;
     
     
