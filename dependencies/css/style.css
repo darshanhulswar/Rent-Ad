@@ -1,0 +1,236 @@
+/*#################################################################################################
+    Author: Darshan Hulswar 
+    Author E-mail: dhulswar591@gmail.com
+    Contact: 9483376591
+#################################################################################################*/
+
+/*#################################################################################################
+    Name : Rent-Ad Custom Styles 
+    Made By : Darshan Hulswar
+    Contact: 9483376591
+
+    Table of Content:
+01/ Preloaders
+02/ Navbar
+03/ Carousel
+04/ Card
+05/ 
+#################################################################################################*/
+
+
+/*#################### Preloader ###############################################################*/
+#preloader {
+  background-color: #fff;  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 9999;
+}
+
+#status {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-top: -20px;
+    margin-left: -20px;
+}
+/*#################### End #####################################################################*/
+
+/*#################### Navbar ##################################################################*/
+.navbar {
+    border-bottom: deeppink 3px solid;
+    opacity: 0.9;
+
+}
+
+.navbar .nav-link {
+    font-size: 14px;
+    font-weight: bolder;
+    text-transform: uppercase;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.navbar .nav-item.active {
+    border: black 1px solid;
+    border-radius: 2px;
+}
+
+.navbar .nav-item .nav-link:hover {
+    color: deeppink;
+}
+
+.navbar .navbar-brand .navbar-brand-name {
+    color: firebrick;
+    font-weight: bolder;
+}
+
+.navbar .navbar-brand .navbar-brand-name:hover {
+    color: crimson;
+}
+/*#################### End #####################################################################*/
+
+/*#################### Carousel ################################################################*/
+.carousel-item {
+    height: 450px;
+    
+}
+
+.carousel-image-1 {
+    background: url('../img/image1.jpeg');
+    background-size: cover;
+}
+
+.carousel-image-2 {
+    background: url('../img/image2.jpeg');
+    background-size: cover;
+}
+
+.carousel-image-3 {
+    background: url('../img/image3.jpeg');
+    background-size: cover;
+}
+/*#################### End #####################################################################*/
+
+/*#################### Card#####################################################################*/
+.card {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0px 10px 30px 1px rgba(153, 153, 153, 0.6);
+    border-radius: 22px;
+}
+/*#################### Card#####################################################################*/
+
+/*################ Thumbnail Image For Property ##########################*/
+.maxwidth-50 {
+        margin: 0 auto;
+        width: 60% !important;
+        height: 30% !important;
+		object-fit: cover;
+      }
+/*####################### End ##################*/
+
+#register {
+    background: url('../img/img20.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+.darkoverlay {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+#features .card {
+    opacity: 0.9;
+}
+
+#features .center{
+    margin-top: 1rem;
+    margin-bottom: rem;
+}
+
+#features .card .fa {
+    color: darkorange;
+}
+
+#features {
+    background: url('../img/img30.jpg');
+    background-size: cover;
+    background-attachment:  fixed;
+}
+
+.signin {
+    border-radius: 10px;
+}
+
+.carousel-border {
+    border-radius: 10px;
+}
+
+#search-section {
+    background: url('../img/img22.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+    
+}
+
+#aboutus {
+    background: url(../img/img16.jpeg);
+    background-size: cover;
+    
+    
+}
+
+#aboutus  .contact-head {
+    color: wheat;
+    font-weight: bolder;
+    padding: 20px;
+}
+
+/* Strong fonts */
+.span-strong {
+    font-weight: bolder;
+}
+
+/* Footer */
+footer {
+    font-family: sans-serif;
+    font-weight: 100;
+
+}
+
+
+/* Login Form Style */
+
+.fancy-inp {
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #3498db;
+    padding: 14px 10px;
+    width: 200px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+}
+
+ .fancy-inp:focus{
+    width: 280px;
+    border-color: #2ecc71;
+}
+
+.fancy-inp-submit {
+    background: none;
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    border: 2px solid #2ecc71;
+    padding: 14px 40px;
+    outline: none;
+    color: white;
+    border-radius: 24px;
+    transition: 0.25s;
+    cursor: pointer;
+}
+
+.fancy-inp-submit:hover{
+    background: #2ecc71;
+}
+
+.form-head {
+    color: #fff;
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+#card-img-top {
+	max-height: 232px;
+}
