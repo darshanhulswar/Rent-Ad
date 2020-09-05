@@ -1,3 +1,32 @@
+<?php
+    include '../inc/dbconnection.inc.php';
+    if(isset($_POST['login'])) {
+
+        $userID = $_POST['userid'];
+        $password = $_POST['password'];
+
+        $sql = "SELECT * FROM employee WHERE user_id = '$userID' AND password = '$password'";
+        $result = $conn->query($sql);
+
+        if($result->num_rows === 1) {
+            $data = $result->fetch_assoc();
+
+            if($userID === $data['user_id'] && $password === $data['password']) {
+                session_start();
+                $_SESSION['employee']['id'] = $data['id'];
+                $_SESSION['employee']['user_id'] = $data['user_id'];
+                $_SESSION['employee']['password'] = $data['password'];
+                header('location: dashboard.php');
+            } else {
+                header('location: invalid-credentials.php');
+            }
+            
+        } else {
+            header('location: invalid-credentials.php');
+        }
+    } 
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -56,11 +85,11 @@
 
                     <div class="form-group">
                         <input class="form-control" type="password" name="password" id="userid" placeholder="Password"
-                            minlength="6" maxlength="20">
+                            minlength="3" maxlength="20">
                     </div>
 
                     <div class="text-center">
-                        <button class="btn btn-outline-success" type="submit">
+                        <button class="btn btn-outline-success" type="submit" name="login">
                             Login
                         </button>
                     </div>
