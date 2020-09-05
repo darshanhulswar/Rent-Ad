@@ -1,5 +1,7 @@
 <?php
     include '../inc/dbconnection.inc.php';
+    
+    // if the user submitted the credentials then
     if(isset($_POST['login'])) {
 
         $userID = $_POST['userid'];
