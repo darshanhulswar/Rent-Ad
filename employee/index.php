@@ -73,28 +73,35 @@
     </nav>
     <!-- Navbar end -->
 
+    <!-- Employee Login Section -->
     <section>
         <div class="container p-5">
             <div class="card w-50 p-5 mx-auto">
+                <p class="text-center text-muted">If you have authorised <span class="text-danger">User ID</span>
+                    and <span class="text-danger">Password</span>
+                    from the Admin Permission then only you can proceed to Employee's Dashboard</p>
                 <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="POST" class="form">
 
+                    <!-- User ID -->
                     <div class="form-group">
                         <input class="form-control" type="text" name="userid" id="userid" placeholder="User ID"
                             minlength="6" maxlength="6" autofocus="on" autocomplete="off">
                     </div>
 
+                    <!-- Password -->
                     <div class="form-group">
-                        <input class="form-control" type="password" name="password" id="userid" placeholder="Password"
+                        <input class="form-control" type="password" name="password" id="password" placeholder="Password"
                             minlength="3" maxlength="20">
                     </div>
 
+                    <!-- Login Button -->
                     <div class="text-center">
                         <button class="btn btn-outline-success" type="submit" name="login">
                             Login
                         </button>
                     </div>
 
-                    <p class="text-center text-secondary">Lorem ipsump</p>
+                    <p class="text-center text-secondary mt-3"></p>
                 </form>
             </div>
         </div>
@@ -106,11 +113,11 @@
             <div class="row">
                 <div class="col-12">
                     <div class="footer text-center">
-                        <p class="text-white span-strong text-secondary my-2">Copyright &copy; All rights reserved |
-                            Site
-                            Desinged and
-                            Developed by
-                            Darshan Hulswar and Vinayak Ravi with <i class="fa fa-heart text-danger"></i></p>
+                        <p class="text-white span-strong text-secondary my-2">
+                            <span class="text-danger">Note:</span> Only Admin Can Add an Employee So you're not allowed
+                            to Signup to Our Rent-Ad
+                            Information System
+                        </p>
                     </div>
                 </div>
             </div>
