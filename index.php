@@ -156,7 +156,7 @@
             <div class="row">
                 <div class="col-12">
                     <div class="footer text-center">
-                        <p class="text-white span-strong text-secondary">Copyright &copy; All rights reserved | Site
+                        <p class="span-strong text-secondary">Copyright &copy; All rights reserved | Site
                             Desinged and
                             Developed by
                             Darshan Hulswar and Vinayak Ravi with <i class="fa fa-heart text-danger"></i></p>
