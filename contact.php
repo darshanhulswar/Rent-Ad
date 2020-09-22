@@ -61,8 +61,11 @@
                     <div class="col-md-7">
                         <div class="card bg-light py-3 my-5">
                             <div class="card-body">
-                                <h2 class="display-4 text-right"><span class="span-strong">Contact Us<i
-                                            class="fa fa-forward px-5 text-danger"></i></span></h2>
+                                <h2 class="display-4 text-right">
+                                    <span class="span-strong">Contact Us
+                                        <i class="fa fa-forward px-5 text-danger"></i>
+                                    </span>
+                                </h2>
                             </div>
                         </div>
 
