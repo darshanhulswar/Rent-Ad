@@ -87,13 +87,14 @@
                     <!-- User ID -->
                     <div class="form-group">
                         <input class="form-control" type="text" name="userid" id="userid" placeholder="User ID"
-                            minlength="6" maxlength="6" autofocus="on" autocomplete="off">
+                            minlength="6" maxlength="6" autofocus="on" autocomplete="off" autofocus="on" required>
+                        <small class="form-text text-muted">4 Digit Unique ID</small>
                     </div>
 
                     <!-- Password -->
                     <div class="form-group">
                         <input class="form-control" type="password" name="password" id="password" placeholder="Password"
-                            minlength="3" maxlength="20">
+                            minlength="3" maxlength="20" required>
                     </div>
 
                     <!-- Login Button -->
