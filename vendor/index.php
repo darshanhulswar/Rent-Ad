@@ -11,16 +11,16 @@
     
         if($email === $data['email'] && $password === $data['password']) {
           session_start();
-          $_SESSION['id'] = $data['id'];
-          $_SESSION['last_name'] = $data['last_name'];
-          $_SESSION['email'] = $data['email'];
-          $_SESSION['dob'] = $data['dob'];
-          $_SESSION['age'] = $data['age'];
-          $_SESSION['gender'] = $data['gender'];
-          $_SESSION['phone'] = $data['phone'];
-          $_SESSION['address'] = $data['address'];
-          $_SESSION['aadhar'] = $data['aadhar'];
-          $_SESSION['password'] = $data['password'];
+          $_SESSION['vendor']['id'] = $data['id'];
+          $_SESSION['vendor']['last_name'] = $data['last_name'];
+          $_SESSION['vendor']['email'] = $data['email'];
+          $_SESSION['vendor']['dob'] = $data['dob'];
+          $_SESSION['vendor']['age'] = $data['age'];
+          $_SESSION['vendor']['gender'] = $data['gender'];
+          $_SESSION['vendor']['phone'] = $data['phone'];
+          $_SESSION['vendor']['address'] = $data['address'];
+          $_SESSION['vendor']['aadhar'] = $data['aadhar'];
+          $_SESSION['vendor']['password'] = $data['password'];
           header('location: vendor-home.php');
         } else {
             header('location: invalid-credentials.php');
