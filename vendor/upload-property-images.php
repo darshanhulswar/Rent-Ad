@@ -1,32 +1,10 @@
 <?php
     include '../inc/dbconnection.inc.php';
-    
-    if(isset($_POST['login'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-    
-        $sql = "SELECT * FROM vendors WHERE email='$email' AND password='$password'";
-        $result = $conn->query($sql);
-        $data = $result->fetch_assoc();
-    
-        if($email === $data['email'] && $password === $data['password']) {
-          session_start();
-          $_SESSION['vendor']['id'] = $data['id'];
-          $_SESSION['vendor']['first_name'] = $data['first_name'];
-          $_SESSION['vendor']['last_name'] = $data['last_name'];
-          $_SESSION['vendor']['email'] = $data['email'];
-          $_SESSION['vendor']['dob'] = $data['dob'];
-          $_SESSION['vendor']['age'] = $data['age'];
-          $_SESSION['vendor']['gender'] = $data['gender'];
-          $_SESSION['vendor']['phone'] = $data['phone'];
-          $_SESSION['vendor']['address'] = $data['address'];
-          $_SESSION['vendor']['aadhar'] = $data['aadhar'];
-          $_SESSION['vendor']['password'] = $data['password'];
-          header('location: vendor-home.php');
-        } else {
-            header('location: invalid-credentials.php');
-        }
-      }
+    session_start();
+   
+    if(isset($_POST['upload'])) {
+        var_dump($_FILES);
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor Login</title>
+    <title>Rent-Ad | Vendor Upload Property Details</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -75,40 +53,67 @@
     </nav>
     <!-- Navbar end -->
 
-    <!-- Vendor Login Section -->
+    <!-- Upload Property Images Section -->
     <section>
-        <div class="container p-5">
-            <div class="card w-50 p-5 mx-auto">
-                <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="POST" class="form">
-
-                    <!-- User Email -->
-                    <div class="form-group">
-                        <input class="form-control" type="email" name="email" id="email" placeholder="email"
-                            minlength="10" maxlength="20" autofocus="on" autocomplete="off" required>
-                        <small class="form-text text-muted">Email ID</small>
+        <div class="container">
+            <form class="form p-5 my-5 w-50 shadow rounded-lg mx-auto" action="<?php echo $_SERVER['PHP_SELF']; ?>"
+                method="POST" enctype="multipart/form-data">
+                <h2 class="display-4">Upload Property</h2>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <!-- hall -->
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="hall">
+                            <label for="" class="custom-file-label">Hall</label>
+                        </div>
                     </div>
 
-                    <!-- Password -->
-                    <div class="form-group">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password"
-                            minlength="4" maxlength="20" required>
+                    <!-- Kitchen -->
+                    <div class="form-group col">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" name="kitchen">
+                            <label for="" class="custom-file-label">Kitchen</label>
+                        </div>
                     </div>
+                </div>
 
-                    <!-- Login Button -->
-                    <div class="text-center">
-                        <button class="btn btn-outline-success" type="submit" name="login">
-                            Login
-                        </button>
+                <!-- Bathroom -->
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="bedroom">
+                        <label for="" class="custom-file-label">Bedroom</label>
                     </div>
+                </div>
 
-                    <p class="text-center text-secondary mt-3"></p>
-                </form>
+                <!-- Bathroom -->
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="bathroom">
+                        <label for="" class="custom-file-label">Bathroom</label>
+                    </div>
+                </div>
 
-                <p class="text-center text-secondary">Not Yet Registered as a vendor? <a href="signup.php"
-                        class="text-decoration-none font-weight-bolder">Signup Here!</a></p>
-                <p class="text-center text-muted">If you have verified <span class="text-danger">Email ID</span>
-                    and <span class="text-danger">Password</span> then only you can proceed to your account</p>
-            </div>
+                <!-- Property -->
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="property">
+                        <label for="" class="custom-file-label">Property</label>
+                    </div>
+                </div>
+
+                <!-- House -->
+                <div class="form-group">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" name="house">
+                        <label for="" class="custom-file-label">House</label>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <button class="btn btn-outline-danger" type="submit" name="upload">Upload</button>
+
+                </div>
+            </form>
         </div>
     </section>
 

@@ -1,32 +1,36 @@
 <?php
     include '../inc/dbconnection.inc.php';
+    session_start();
     
-    if(isset($_POST['login'])) {
-        $email = $_POST['email'];
-        $password = $_POST['password'];
-    
-        $sql = "SELECT * FROM vendors WHERE email='$email' AND password='$password'";
-        $result = $conn->query($sql);
-        $data = $result->fetch_assoc();
-    
-        if($email === $data['email'] && $password === $data['password']) {
-          session_start();
-          $_SESSION['vendor']['id'] = $data['id'];
-          $_SESSION['vendor']['first_name'] = $data['first_name'];
-          $_SESSION['vendor']['last_name'] = $data['last_name'];
-          $_SESSION['vendor']['email'] = $data['email'];
-          $_SESSION['vendor']['dob'] = $data['dob'];
-          $_SESSION['vendor']['age'] = $data['age'];
-          $_SESSION['vendor']['gender'] = $data['gender'];
-          $_SESSION['vendor']['phone'] = $data['phone'];
-          $_SESSION['vendor']['address'] = $data['address'];
-          $_SESSION['vendor']['aadhar'] = $data['aadhar'];
-          $_SESSION['vendor']['password'] = $data['password'];
-          header('location: vendor-home.php');
-        } else {
-            header('location: invalid-credentials.php');
-        }
-      }
+    if(isset($_POST['submit'])) {
+
+        // Get all Posted data from submitted form
+        {
+            $name = $_POST['name'];
+            $location = $_POST['location'];
+            $details = $_POST['details'];
+            $bed = $_POST['bed'];
+            $parking = $_POST['parking'];
+            $rpm = $_POST['rpm'];
+            $vendorId = $_SESSION['vendor']['id'];
+          }
+
+            $saveTextualPropertyDataQuery = "INSERT INTO `properties`(`name`, `location`, `details`, `bed`, `parking`, `rpm`, `vendor_id`) VALUES('$name', '$location', '$details', '$bed', '$parking', '$rpm', '$vendorId')";
+            if($conn->query($saveTextualPropertyDataQuery)) {
+                $sql = "SELECT * FROM properties WHERE id=LAST_INSERT_ID()";
+                $result = $conn->query($sql);
+                $data = $result->fetch_assoc();
+                $_SESSION['property'] = $data;
+                $propertyID = $_SESSION['property']['id'];
+                header("location: upload-property-images.php?property-id=" . $propertyID);
+            }
+    }
+
+    if(isset($_SESSION['vendor']['id'])) {
+
+    } else {
+        header('location: index.php?vendor-upload-property-direct-access-permission-not-allowed=1');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -39,7 +43,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor Login</title>
+    <title>Rent-Ad | Vendor Upload Property Details</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -75,40 +79,55 @@
     </nav>
     <!-- Navbar end -->
 
-    <!-- Vendor Login Section -->
+    <!-- Section to upload Textual Property Details  -->
     <section>
-        <div class="container p-5">
-            <div class="card w-50 p-5 mx-auto">
-                <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="POST" class="form">
-
-                    <!-- User Email -->
-                    <div class="form-group">
-                        <input class="form-control" type="email" name="email" id="email" placeholder="email"
-                            minlength="10" maxlength="20" autofocus="on" autocomplete="off" required>
-                        <small class="form-text text-muted">Email ID</small>
+        <div class="conatiner">
+            <form method="POST" action="upload-property.php" class="form w-50 my-5 p-5 shadow rouded mx-auto">
+                <h2 class="display-4 text-center border-bottom">Post Details</h2>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="">House Name</label>
+                        <input class="form-control" type="text" autofocus="true" name="name" placeholder="Property Name"
+                            autocomplete="off" required>
                     </div>
 
-                    <!-- Password -->
-                    <div class="form-group">
-                        <input class="form-control" type="password" name="password" id="password" placeholder="Password"
-                            minlength="4" maxlength="20" required>
+                    <div class="form-group col-md-6">
+                        <label for="">House Location</label>
+                        <input class="form-control" type="text" name="location" placeholder="Property Location"
+                            autocomplete="off" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="">Rent Per Month</label>
+                        <input class="form-control" type="number" name="rpm" placeholder="Rent Per Month"
+                            autocomplete="off" required>
                     </div>
 
-                    <!-- Login Button -->
-                    <div class="text-center">
-                        <button class="btn btn-outline-success" type="submit" name="login">
-                            Login
-                        </button>
+                    <div class="form-group col">
+                        <label for="">Bed</label>
+                        <input class="form-control" type="text" name="bed" placeholder="Bedrooms" autocomplete="off"
+                            required>
                     </div>
 
-                    <p class="text-center text-secondary mt-3"></p>
-                </form>
+                    <div class="form-group col">
+                        <label for="">Parking</label>
+                        <input class="form-control" type="text" name="parking" placeholder="Bedrooms" autocomplete="off"
+                            required>
+                    </div>
+                </div>
 
-                <p class="text-center text-secondary">Not Yet Registered as a vendor? <a href="signup.php"
-                        class="text-decoration-none font-weight-bolder">Signup Here!</a></p>
-                <p class="text-center text-muted">If you have verified <span class="text-danger">Email ID</span>
-                    and <span class="text-danger">Password</span> then only you can proceed to your account</p>
-            </div>
+                <div class="form-group">
+                    <label for="">Property Details</label>
+                    <textarea name="details" rows="8" cols="80" class="form-control"
+                        placeholder="villa is most amazing and more..." autocomplete="off" required></textarea>
+                </div>
+
+                <div class="text-center">
+                    <input class="btn btn-outline-primary" type="submit" name="submit" value="Post Property">
+                </div>
+            </form>
         </div>
     </section>
 
