@@ -12,6 +12,7 @@
         if($email === $data['email'] && $password === $data['password']) {
           session_start();
           $_SESSION['vendor']['id'] = $data['id'];
+          $_SESSION['vendor']['first_name'] = $data['first_name'];
           $_SESSION['vendor']['last_name'] = $data['last_name'];
           $_SESSION['vendor']['email'] = $data['email'];
           $_SESSION['vendor']['dob'] = $data['dob'];
