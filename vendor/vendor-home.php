@@ -149,28 +149,22 @@
     <section>
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <a href="upload-property.php" class="text-decoration-none">
                         <div class="card p-4">
                             <h4 class="h4 text-center">Post a Property</h4>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
-                    <a href="uploview-properties.php" class="text-decoration-none">
+                <div class="col-md-4">
+                    <a href="view-uploaded-properties.php?vendor-id=<?php echo $_SESSION['vendor']['id']; ?>"
+                        class="text-decoration-none">
                         <div class="card p-4">
                             <h4 class="h4 text-center">View Properties</h4>
                         </div>
                     </a>
                 </div>
-                <div class="col-md-3">
-                    <a href="delete-properties.php" class="text-decoration-none">
-                        <div class="card p-4">
-                            <h4 class="h4 text-center">Delete Properties</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card p-4">
                         <a href="vendor-profile.php" class="text-decoration-none">
                             <h4 class="h4 text-center">Profile</h4>
@@ -184,7 +178,6 @@
     <section>
         <div class="container">
             <div class="text-secondary">
-                <span class="text"><?php var_dump($_SESSION); ?></span>
             </div>
         </div>
     </section>

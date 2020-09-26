@@ -1,6 +1,8 @@
 <?php
     include '../inc/dbconnection.inc.php';
     
+    $invalidCredentialsStatus = 0;
+    
     // if the user submitted the credentials then
     if(isset($_POST['login'])) {
 
@@ -20,11 +22,11 @@
                 $_SESSION['employee']['password'] = $data['password'];
                 header('location: dashboard.php');
             } else {
-                header('location: invalid-credentials.php');
+                $invalidCredentialsStatus = 1;
             }
             
         } else {
-            header('location: invalid-credentials.php');
+            $invalidCredentialsStatus = 1;
         }
     } 
 ?>
@@ -78,7 +80,22 @@
     <!-- Employee Login Section -->
     <section>
         <div class="container p-5">
+
+
+
             <div class="card w-50 p-5 mx-auto">
+
+                <!-- Invalid Credentials Alert -->
+                <?php if($invalidCredentialsStatus === 1): ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Invalid Username or ID</strong> Please enter the valid Username or Password
+
+                    <button type="button" data-dismiss="alert" aler-label="close" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php endif; ?>
+
                 <p class="text-center text-muted">If you have authorised <span class="text-danger">User ID</span>
                     and <span class="text-danger">Password</span>
                     from the Admin Permission then only you can proceed to Employee's Dashboard</p>

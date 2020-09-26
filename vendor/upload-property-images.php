@@ -3,8 +3,58 @@
     session_start();
    
     if(isset($_POST['upload'])) {
-        var_dump($_FILES);
-    }
+       
+            // var_dump($_FILES);
+        $dir = "../uploads/property-uploads/";
+        $hallFolder = "hall/";
+        $kitchenFolder = "kitchen/";
+        $bedroomFolder = "bedroom/";
+        $bathroomFolder = "bathroom/";
+        $propertyFolder = "property/";
+        $houseFolder = "house/";
+        $propertyImages = [];
+    
+        foreach ($_FILES as $file) {
+        $propertyImages[] = uniqid().$file['name'];
+        }
+
+        // $i = 0;
+        // foreach ($_FILES as $file) {
+        // move_uploaded_file($file['tmp_name'], $dir.$propertyImages[$i]);
+        // $i++;
+        // }
+
+        move_uploaded_file($_FILES['hall']['tmp_name'], $dir.$hallFolder.$propertyImages[0]);
+        move_uploaded_file($_FILES['kitchen']['tmp_name'], $dir.$kitchenFolder.$propertyImages[1]);
+        move_uploaded_file($_FILES['bedroom']['tmp_name'], $dir.$bedroomFolder.$propertyImages[2]);
+        move_uploaded_file($_FILES['bathroom']['tmp_name'], $dir.$bathroomFolder.$propertyImages[3]);
+        move_uploaded_file($_FILES['property']['tmp_name'], $dir.$propertyFolder.$propertyImages[4]);
+        move_uploaded_file($_FILES['house']['tmp_name'], $dir.$houseFolder.$propertyImages[5]);
+
+        echo $_FILES['hall']['tmp_name'];
+        $i = 0;
+        // foreach ($propertyImages as $property) {
+        // echo $property . $i . "<br>";
+        // $i += 1;
+        // }
+
+        $hall = $propertyImages[0];
+        $kitchen = $propertyImages[1];
+        $bathroom = $propertyImages[2];
+        $bedroom = $propertyImages[3];
+        $house = $propertyImages[4];
+        $prop_id = $_SESSION['property']['id'];
+
+        $sql = "INSERT INTO `images`(`hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES ('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$prop_id')";
+
+        // $sql = "INSERT INTO images VALUES('".$propertyImages[0]."', '".$propertyImages[1]."', '".$propertyImages[2]."', '".$propertyImages[3]."', '".$propertyImages[4]."','".$_SESSION['property_id']."' )";
+        if($conn->query($sql)) {
+        header('location: property-upload-success.php');
+        } else {
+        echo "Error Uploadinig";
+        }
+        // var_dump($propertyImages);
+   }
 ?>
 
 <!DOCTYPE html>
@@ -56,8 +106,8 @@
     <!-- Upload Property Images Section -->
     <section>
         <div class="container">
-            <form class="form p-5 my-5 w-50 shadow rounded-lg mx-auto" action="<?php echo $_SERVER['PHP_SELF']; ?>"
-                method="POST" enctype="multipart/form-data">
+            <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data"
+                class="form p-5 my-5 w-50 shadow rounded-lg mx-auto">
                 <h2 class="display-4">Upload Property</h2>
                 <div class="form-row">
                     <div class="form-group col">

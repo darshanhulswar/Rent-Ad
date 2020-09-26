@@ -2,6 +2,37 @@
     include '../inc/dbconnection.inc.php';
 
     session_start();
+   if(isset($_SESSION['vendor']['id'])) {
+        $vendorID = $_SESSION['vendor']['id'];
+        $propertiesQuery = "SELECT * FROM properties WHERE vendor_id = '$vendorID'";
+
+        // $propertyImageQuery = "SELECT * FROM images WHERE property_id = '$'";
+
+        if($rawData = $conn->query($propertiesQuery)) {
+            $allProperties['uploaded-properties'] = [];
+            foreach($rawData as $property) {
+                $allProperties['uploaded-properties'][] = $property;
+            }
+        }
+   } else {
+       header('location: index.php?direct-permission-access-violation=1');
+   }
+
+//    Delete Property
+   if(isset($_GET['delete-property-id'])) {
+       if(isset($_SESSION['vendor']['id'])) {
+        $propertyID = $_GET['delete-property-id'];
+        $deletePropertyQuery = "DELETE FROM properties WHERE id = '$propertyID'";
+        if($conn->query($deletePropertyQuery)) {
+            echo "Property ID $propertyID Deleted Successfull";
+        } else {
+            echo "ERROR";
+        }
+    } else {
+           header('location: index.php?direct-access-permission-error=1');
+       }
+   }
+    
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +45,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor SignUp</title>
+    <title>Rent-Ad | Vendor | View Uploaded Properties</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -44,16 +75,23 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
+
                 </ul>
 
                 <!-- SignIn and SignOut Links -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="signin.php" class="nav-link">
-                            jj
+                        <a href="#" class="nav-link">
+                            <?php echo $_SESSION['vendor']['first_name']; ?>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="<?php $_SERVER['PHP_SELF']; ?>?vendor-logout-status=1" class="nav-link">
+                            <i class="fa fa-sign-out"></i>
+                            Sign Out</a>
+                    </li>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -121,19 +159,109 @@
     </section>
     <!--  Carousel End  -->
 
-    <!-- Menu Section -->
+    <!-- View all uploaded Properties -->
     <section>
         <div class="container">
-            kolo
+
+            <?php for($i = 0; $i < count($allProperties['uploaded-properties']); $i++): ?>
+            <div class="card my-3 p-3">
+                <ul class="nav nav-tabs" id="myTab-<?php echo $i; ?>" role="tablist">
+                    <!-- Home 1stTab -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="house-tab-<?php echo $i; ?>" data-toggle="tab"
+                            href="#house-<?php echo $i; ?>" role="tab" aria-controls="house-<?php echo $i; ?>"
+                            aria-selected="true">House</a>
+                    </li>
+
+                    <!-- Home Details -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="details-tab-<?php echo $i; ?>" data-toggle="tab"
+                            href="#details-<?php echo $i; ?>" role="tab" aria-controls="details-<?php echo $i; ?>"
+                            aria-selected="false">Details</a>
+                    </li>
+
+                    <!-- Contact Vendor -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab-<?php echo $i; ?>" data-toggle="tab"
+                            href="#contact-<?php echo $i; ?>" role="tab" aria-controls="contact-<?php echo $i; ?>"
+                            aria-selected="false">Contact Vendor</a>
+                    </li>
+
+                    <!-- Property Images -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="img-<?php echo $i; ?>" data-toggle="tab" href="#img-<?php echo $i; ?>"
+                            role="tab" aria-controls="img-<?php echo $i; ?>" aria-selected="false">Property Images</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="house-<?php echo $i; ?>" role="tabpanel"
+                        aria-labelledby="house-tab-<?php echo $i; ?>">
+                        <p class="lead">
+                            <?php echo $allProperties['uploaded-properties'][$i]['name'] ?>
+                        </p>
+
+                        <p class="lead"> Bedrooms:
+                            <?php echo $allProperties['uploaded-properties'][$i]['bed'] ?>
+                        </p>
+
+                        <p class="lead">
+                            <?php echo $allProperties['uploaded-properties'][$i]['parking'] ?>
+                        </p>
+
+                        <p class="lead">
+                            ID: <?php echo $allProperties['uploaded-properties'][$i]['id'] ?>
+                        </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="details-<?php echo $i; ?>" role="tabpanel"
+                        aria-labelledby="details-tab-<?php echo $i; ?>">
+                        <p class="lead">
+                            <?php echo $allProperties['uploaded-properties'][$i]['details']; ?>
+                        </p>
+
+                        <p class="lead">
+                            <?php echo $allProperties['uploaded-properties'][$i]['location'] ?>
+                        </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="contact-<?php echo $i; ?>" role="tabpanel"
+                        aria-labelledby="contact-tab">
+                        <?php 
+                            $getVendorDetails = "SELECT phone FROM vendors WHERE id = '$vendorID'";
+                            $rawData = $conn->query($getVendorDetails);
+                            $phoneNumber = $rawData->fetch_assoc();
+                        ?>
+
+                        <p class="lead">
+                            Phone Number: <?php echo $phoneNumber['phone']; ?>
+                        </p>
+                    </div>
+
+                    <!-- Images -->
+                    <div class="tab-pane fade" id="img-<?php echo $i; ?>" role="tabpanel"
+                        aria-labelledby="img-tab-<?php echo $i; ?>">
+                        <?php
+                            $propertyID =  $allProperties['uploaded-properties'][$i]['id'];
+                            $getImagesQuery = "SELECT * FROM images WHERE property_id = '$propertyID'";
+
+                            $rawData = $conn->query($getImagesQuery);
+                            var_dump($rawData);
+                        ?>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="view-uploaded-properties.php?delete-property-id=<?php echo $allProperties['uploaded-properties'][$i]['id'] ?>"
+                        class="btn btn-danger">
+                        Delete Property
+                    </a>
+                </div>
+
+            </div>
+            <?php endfor; ?>
         </div>
     </section>
 
-    <section>
-        <div class="container">
-            <div class="text-secondary">
-            </div>
-        </div>
-    </section>
 
     <!-- Footer -->
     <footer class="bg-dark">

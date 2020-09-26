@@ -1,36 +1,10 @@
 <?php
     include '../inc/dbconnection.inc.php';
+    header('refresh: 6; url = vendor-home.php?property-upload-success-status=1');
     session_start();
-    
-    if(isset($_POST['submit'])) {
-
-        // Get all Posted data from submitted form
-        {
-            $name = $_POST['name'];
-            $location = $_POST['location'];
-            $details = $_POST['details'];
-            $bed = $_POST['bed'];
-            $parking = $_POST['parking'];
-            $rpm = $_POST['rpm'];
-            $vendorId = $_SESSION['vendor']['id'];
-          }
-
-            $saveTextualPropertyDataQuery = "INSERT INTO `properties`(`name`, `location`, `details`, `bed`, `parking`, `rpm`, `vendor_id`) VALUES('$name', '$location', '$details', '$bed', '$parking', '$rpm', '$vendorId')";
-            if($conn->query($saveTextualPropertyDataQuery)) {
-                $sql = "SELECT * FROM properties WHERE id=LAST_INSERT_ID()";
-                $result = $conn->query($sql);
-                $data = $result->fetch_assoc();
-                $_SESSION['property'] = $data;
-                $propertyID = $_SESSION['property']['id'];
-                header("location: upload-property-images.php?property-id=" . $propertyID);
-            }
-    }
-
-    if(isset($_SESSION['vendor']['id'])) {
-
-    } else {
-        header('location: index.php?vendor-upload-property-direct-access-permission-not-allowed=1');
-    }
+    var_dump($_SESSION);
+   
+   
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +17,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor Upload Property Details</title>
+    <title>Rent-Ad | Vendor Property Upload Success</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -79,55 +53,17 @@
     </nav>
     <!-- Navbar end -->
 
-    <!-- Section to upload Textual Property Details  -->
     <section>
-        <div class="conatiner">
-            <form method="POST" action="upload-property.php" class="form w-50 my-5 p-5 shadow rouded mx-auto">
-                <h2 class="display-4 text-center border-bottom">Post Details</h2>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="">House Name</label>
-                        <input class="form-control" type="text" autofocus="true" name="name" placeholder="Property Name"
-                            autocomplete="off" required>
-                    </div>
-
-                    <div class="form-group col-md-6">
-                        <label for="">House Location</label>
-                        <input class="form-control" type="text" name="location" placeholder="Property Location"
-                            autocomplete="off" required>
-                    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col"></div>
+                <div class="col">
+                    <h1 class="display-2 text-center">Property Upload Success!</h1>
+                    <p class="text-center lead text-secondary">You will beredirected to vendor home within 3 seconds
+                        please wait...</p>
                 </div>
-
-                <div class="form-row">
-                    <div class="form-group col">
-                        <label for="">Rent Per Month</label>
-                        <input class="form-control" type="number" name="rpm" placeholder="Rent Per Month"
-                            autocomplete="off" required>
-                    </div>
-
-                    <div class="form-group col">
-                        <label for="">Bed</label>
-                        <input class="form-control" type="text" name="bed" placeholder="Bedrooms" autocomplete="off"
-                            required>
-                    </div>
-
-                    <div class="form-group col">
-                        <label for="">Parking</label>
-                        <input class="form-control" type="text" name="parking" placeholder="Parking Lot"
-                            autocomplete="off" required>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="">Property Details</label>
-                    <textarea name="details" rows="8" cols="80" class="form-control"
-                        placeholder="villa is most amazing and more..." autocomplete="off" required></textarea>
-                </div>
-
-                <div class="text-center">
-                    <input class="btn btn-outline-primary" type="submit" name="submit" value="Post Property">
-                </div>
-            </form>
+                <div class="col"></div>
+            </div>
         </div>
     </section>
 
