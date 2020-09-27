@@ -4,7 +4,7 @@
    
     if(isset($_POST['upload'])) {
        
-            // var_dump($_FILES);
+            var_dump($_FILES);
         $dir = "../uploads/property-uploads/";
         $hallFolder = "hall/";
         $kitchenFolder = "kitchen/";
@@ -113,8 +113,9 @@
                     <div class="form-group col">
                         <!-- hall -->
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="hall">
-                            <label for="" class="custom-file-label">Hall</label>
+                            <input type="file" class="custom-file-input" name="hall" id="validatedCustomFile-hall">
+                            <label for="validatedCustomFile-hall" class="custom-file-label">Hall</label>
+                            <div class="invalid-feedback">Please select proper Images</div>
                         </div>
                     </div>
 
