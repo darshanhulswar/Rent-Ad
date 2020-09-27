@@ -27,7 +27,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
         <div class="container">
             <a href="index.php" class="navbar-brand text-center">
                 <img src="assets/icons/favicon.png" alt="">
