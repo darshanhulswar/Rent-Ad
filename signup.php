@@ -2,13 +2,12 @@
 <html lang="en">
 
 <head>
-
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Live with smartness | Better Living For All In Few Clicks</title>
+    <title>Rent-Ad | signup</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
