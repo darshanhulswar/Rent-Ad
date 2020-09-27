@@ -2,8 +2,8 @@
     include '../inc/dbconnection.inc.php';
     session_start();
 
-    
-
+    $rentVerifiedHouses = $rentunVerifiedHouses = [];
+    $totalHouses = 0;
     if(isset($_SESSION['employee']['id'])) {
         $verifiedHouseQuery = "SELECT * FROM properties Where is_verified > 0";
 
@@ -21,6 +21,8 @@
         foreach ($unVerifiedHouses as $unVerifiedHouse ) {
             $rentunVerifiedHouses[] = $unVerifiedHouse;
         }
+
+        $totalHouses = count($rentVerifiedHouses) + count($rentunVerifiedHouses);
     } else {
         header('location: index.php?employee-must-login');
     }
@@ -29,8 +31,7 @@
         if($_GET['logout-employee'] === '1') {
             session_start();
             if(isset($_SESSION['employee']['id'])) {
-                session_unset();
-                session_destroy();
+               unset($_SESSION['employee']);
                 header('location: index.php?employee-logout-status=1');
             } else {
                 header('location: index.php?error=1');
@@ -105,7 +106,7 @@
                         <h4 class="h4 text-center font-weight-bolder user-select-none">Total
                             Rent Houses</h4>
                         <h3 class="h3 text-center font-weight-bolder user-select-none">
-                            <?php echo count($rentVerifiedHouses) + count($rentunVerifiedHouses); ?>
+                            <?php echo $totalHouses; ?>
                         </h3>
                     </div>
                 </div>
