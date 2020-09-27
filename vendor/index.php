@@ -1,30 +1,36 @@
 <?php
     include '../inc/dbconnection.inc.php';
-    
+    session_start();
+
+    $invalidCredentialsStatus = 0;
     if(isset($_POST['login'])) {
         $email = $_POST['email'];
         $password = $_POST['password'];
     
         $sql = "SELECT * FROM vendors WHERE email='$email' AND password='$password'";
         $result = $conn->query($sql);
-        $data = $result->fetch_assoc();
     
-        if($email === $data['email'] && $password === $data['password']) {
-          session_start();
-          $_SESSION['vendor']['id'] = $data['id'];
-          $_SESSION['vendor']['first_name'] = $data['first_name'];
-          $_SESSION['vendor']['last_name'] = $data['last_name'];
-          $_SESSION['vendor']['email'] = $data['email'];
-          $_SESSION['vendor']['dob'] = $data['dob'];
-          $_SESSION['vendor']['age'] = $data['age'];
-          $_SESSION['vendor']['gender'] = $data['gender'];
-          $_SESSION['vendor']['phone'] = $data['phone'];
-          $_SESSION['vendor']['address'] = $data['address'];
-          $_SESSION['vendor']['aadhar'] = $data['aadhar'];
-          $_SESSION['vendor']['password'] = $data['password'];
-          header('location: vendor-home.php');
+        if($result->num_rows === 1) {
+            $data = $result->fetch_assoc();
+
+            if($email === $data['email'] && $password === $data['password']) {
+                $_SESSION['vendor']['id'] = $data['id'];
+                $_SESSION['vendor']['first_name'] = $data['first_name'];
+                $_SESSION['vendor']['last_name'] = $data['last_name'];
+                $_SESSION['vendor']['email'] = $data['email'];
+                $_SESSION['vendor']['dob'] = $data['dob'];
+                $_SESSION['vendor']['age'] = $data['age'];
+                $_SESSION['vendor']['gender'] = $data['gender'];
+                $_SESSION['vendor']['phone'] = $data['phone'];
+                $_SESSION['vendor']['address'] = $data['address'];
+                $_SESSION['vendor']['aadhar'] = $data['aadhar'];
+                $_SESSION['vendor']['password'] = $data['password'];
+                header('location: vendor-home.php');
+            } else {
+                $invalidCredentialsStatus = 1;
+            }
         } else {
-            header('location: invalid-credentials.php');
+            $invalidCredentialsStatus = 1;
         }
       }
 ?>
@@ -79,6 +85,32 @@
     <section>
         <div class="container p-5">
             <div class="card w-50 p-5 mx-auto">
+
+                <!-- <h1 class="display-4 text-secondary text-center">You are the Gem of our Business</h1>
+                <p class="lead text-center text-secondary"><span class="font-weight-bolder">Peace</span> of Our Users
+                </p> -->
+
+                <!-- Logo -->
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="../assets/icons/favicon.png" alt="Rent-Ad">
+                </div>
+
+                <!-- Short Highlight -->
+                <p class="text-center text-muted">If you have authorised <span class="text-danger">User Email</span>
+                    and <span class="text-danger">Password</span>
+                    then only you can get most of our benefits</p>
+
+                <!-- Invalid Credentials Alert -->
+                <?php if($invalidCredentialsStatus === 1): ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>Invalid Email ID or Password</strong> Please enter the valid Email and Password
+
+                    <button type="button" data-dismiss="alert" aler-label="close" class="close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <?php endif; ?>
+
                 <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="POST" class="form">
 
                     <!-- User Email -->

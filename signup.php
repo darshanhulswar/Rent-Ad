@@ -19,19 +19,6 @@
 
 	if($conn->query($saveDataQuery)){
         session_start();
-        // $_SESSION['user'] = $_POST['firstname'];
-        // $_SESSION['lastname'] = $_POST['lastname'];
-        // $_SESSION['dob'] = $_POST['dob'];
-        // $_SESSION['age'] = $_POST['age'];
-        // $_SESSION['gender'] = $_POST['gender'];
-        // $_SESSION['contactno'] = $_POST['contactno'];
-        // $_SESSION['email'] = $_POST['email'];
-        // $_SESSION['address'] = $_POST['address'];
-        // $_SESSION['city'] = $_POST['city'];
-        // $_SESSION['state'] = $_POST['state'];
-        // $_SESSION['postalcode'] = $_POST['postalcode'];
-        // $_SESSION['password'] = $_POST['password'];
-
         $_SESSION['user'] = $_POST;
         var_dump($_SESSION);
 		// header("Location: ../signin.php?registration-successfull");

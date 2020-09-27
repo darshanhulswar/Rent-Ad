@@ -85,10 +85,20 @@
 
             <div class="card w-50 p-5 mx-auto">
 
+                <!-- Logo -->
+                <div class="d-flex justify-content-center mb-3">
+                    <img src="../assets/icons/favicon.png" alt="Rent-Ad">
+                </div>
+
+                <!-- Short Highlight -->
+                <p class="text-center text-muted">If you have authorised <span class="text-danger">User ID</span>
+                    and <span class="text-danger">Password</span>
+                    from the Admin Permission then only you can proceed to Employee's Dashboard</p>
+
                 <!-- Invalid Credentials Alert -->
                 <?php if($invalidCredentialsStatus === 1): ?>
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                    <strong>Invalid Username or ID</strong> Please enter the valid Username or Password
+                    <strong>Invalid UserID or Password</strong> Please enter the valid UserID or Password
 
                     <button type="button" data-dismiss="alert" aler-label="close" class="close">
                         <span aria-hidden="true">&times;</span>
@@ -96,9 +106,6 @@
                 </div>
                 <?php endif; ?>
 
-                <p class="text-center text-muted">If you have authorised <span class="text-danger">User ID</span>
-                    and <span class="text-danger">Password</span>
-                    from the Admin Permission then only you can proceed to Employee's Dashboard</p>
                 <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="POST" class="form">
 
                     <!-- User ID -->

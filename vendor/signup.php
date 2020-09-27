@@ -121,19 +121,143 @@
     </section>
     <!--  Carousel End  -->
 
-    <!-- Menu Section -->
-    <section>
-        <div class="container">
-            kolo
-        </div>
-    </section>
+    <!-- signup form -->
+    <div class="container">
+        <div class="card pb-2 bg-light">
+            <h4 class="card-header display-4 text-center bg-light m-3 card-head"><strong>Register Now</strong></h4>
+            <div class="card-body">
+                <div class="container">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="form" method="POST">
+                        <div class="row">
+                            <div class="col-md-6 my-3">
+                                <div class="p-3">
+                                    <!-- Firstname -->
+                                    <div class="form-group">
+                                        <label for="firstname">First Name</label>
+                                        <input type="text" class="form-control" name="firstname" placeholder="John"
+                                            required>
+                                    </div>
 
-    <section>
-        <div class="container">
-            <div class="text-secondary">
+                                    <!-- Lastname -->
+                                    <div class="form-group">
+                                        <label for="lastname">Last Name</label>
+                                        <input type="text" class="form-control" name="lastname" placeholder="Doe"
+                                            required>
+                                    </div>
+
+                                    <!-- DOB -->
+                                    <div class="form-group">
+                                        <label for="dob">DOB</label>
+                                        <input type="date" class="form-control" name="dob" placeholder="yyyy-mm-dd"
+                                            required>
+                                    </div>
+
+                                    <!-- Age -->
+                                    <div class="form-group">
+                                        <label for="age">Age</label>
+                                        <input type="number" class="form-control" name="age" placeholder="Age" required>
+                                    </div>
+
+                                    <!-- Gender -->
+                                    <div class="form-group">
+                                        <label class="d-block">Gender</label>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" value="male"
+                                                checked>
+                                            <label class="form-check-label" for="exampleRadios1">Male</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="gender" value="female">
+                                            <label class="form-check-label" for="exampleRadios2">
+                                                Female
+                                            </label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 my-3 d-none d-md-block">
+                                <div class="container">
+                                    <div class="w-100 d-flex flex-column">
+                                        <h1 class="h1">Basic Proof Information</h1>
+
+                                        <div class="d-flex flex-column">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <div class="p-3">
+                                    <!-- Contact No -->
+                                    <div class="form-group">
+                                        <label for="contactno">Contact No</label>
+                                        <input type="text" class="form-control" name="contactno"
+                                            placeholder="1234 525 265" required>
+                                    </div>
+
+                                    <!-- Email -->
+                                    <div class="form-group">
+                                        <label for="email">Email</label>
+                                        <input type="text" class="form-control" name="email"
+                                            placeholder="johndoe@gmail.com" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="p-3">
+                                    <!-- Address -->
+                                    <div class="form-group">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="form-control" name="address"
+                                            placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing" required>
+                                    </div>
+
+                                    <!-- City -->
+                                    <div class="form-group">
+                                        <label for="city">City</label>
+                                        <input type="text" class="form-control" name="city" placeholder="lorem"
+                                            required>
+                                    </div>
+
+                                    <!-- State -->
+                                    <div class="form-group">
+                                        <label for="state">State</label>
+                                        <input type="text" class="form-control" name="state" placeholder="Karnataka"
+                                            required>
+                                    </div>
+
+                                    <!-- Postal code -->
+                                    <div class="form-group">
+                                        <label for="postalcode">Postalcode</label>
+                                        <input type="text" class="form-control" name="postalcode" placeholder="581-334"
+                                            required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6"></div>
+                </div>
+                <!-- Password -->
+                <div class="form-group w-25 mx-auto">
+                    <label for="postalcode">Password</label>
+                    <input type="password" class="form-control" name="password" required>
+                </div>
+
+                <button type="submit" class="btn btn-danger btn-block w-25 mx-auto" name="signup">SignUp</button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+    <!-- signup form section end -->
 
     <!-- Footer -->
     <footer class="bg-dark">

@@ -8,7 +8,7 @@
     }
 
     if(isset($_GET['vendor-logout-status'])) {
-        if(!isset($_SESSION['vendor']['id'])) {
+        if(isset($_SESSION['vendor']['id'])) {
             unset($_SESSION['vendor']);
             header('location: ./../signin.php?user-logout-status=1');
         } else {

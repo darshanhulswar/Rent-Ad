@@ -2,6 +2,10 @@
     include '../inc/dbconnection.inc.php';
     session_start();
 
+    if(!isset($_SESSION['user'])) {
+        header('location: ../signin.php?direct-access-permission-denied-status=1');
+    }
+
     if(isset($_GET['user-logout-status'])) {
         if(isset($_SESSION['user']['id'])) {
             session_unset();
