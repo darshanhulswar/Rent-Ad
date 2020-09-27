@@ -1,3 +1,46 @@
+<?php
+    include('inc/dbconnection.inc.php');
+
+    if(isset($_POST['signup'])) {
+    $firstname = $_POST['firstname'];
+	$lastname = $_POST['lastname'];
+	$dob = $_POST['dob'];
+	$age = $_POST['age'];
+	$gender = $_POST['gender'];
+	$contactno = $_POST['contactno'];
+	$email = $_POST['email'];
+	$address = $_POST['address'];
+	$city = $_POST['city'];
+	$state = $_POST['state'];
+	$postalcode = $_POST['postalcode'];
+	$password = $_POST['password'];
+
+	$saveDataQuery = "INSERT INTO `users` (`firstname`, `lastname`, `dob`, `age`, `gender`, `contactno`, `email`, `address`, `city`, `state`, `postalcode`, `password`) VALUES ('$firstname', '$lastname', '$dob', '$age', '$gender', '$contactno', '$email', '$address', '$city', '$state', '$postalcode', '$password')";
+
+	if($conn->query($saveDataQuery)){
+        session_start();
+        // $_SESSION['user'] = $_POST['firstname'];
+        // $_SESSION['lastname'] = $_POST['lastname'];
+        // $_SESSION['dob'] = $_POST['dob'];
+        // $_SESSION['age'] = $_POST['age'];
+        // $_SESSION['gender'] = $_POST['gender'];
+        // $_SESSION['contactno'] = $_POST['contactno'];
+        // $_SESSION['email'] = $_POST['email'];
+        // $_SESSION['address'] = $_POST['address'];
+        // $_SESSION['city'] = $_POST['city'];
+        // $_SESSION['state'] = $_POST['state'];
+        // $_SESSION['postalcode'] = $_POST['postalcode'];
+        // $_SESSION['password'] = $_POST['password'];
+
+        $_SESSION['user'] = $_POST;
+        var_dump($_SESSION);
+		// header("Location: ../signin.php?registration-successfull");
+	} else {
+		header("Location: signup.php?try-different-username-or-password-status=1");
+    }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -60,8 +103,8 @@
                 <div class="container">
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="form" method="POST">
                         <div class="row">
-                            <div class="col-md-5 my-3">
-                                <div class="card shadow p-3">
+                            <div class="col-md-6 my-3">
+                                <div class="p-3">
                                     <!-- Firstname -->
                                     <div class="form-group">
                                         <label for="firstname">First Name</label>
@@ -79,19 +122,19 @@
                                     <!-- DOB -->
                                     <div class="form-group">
                                         <label for="dob">DOB</label>
-                                        <input type="text" class="form-control" name="dob" placeholder="yyyy-mm-dd"
+                                        <input type="date" class="form-control" name="dob" placeholder="yyyy-mm-dd"
                                             required>
                                     </div>
 
                                     <!-- Age -->
                                     <div class="form-group">
                                         <label for="age">Age</label>
-                                        <input type="text" class="form-control" name="age" placeholder="Age" required>
+                                        <input type="number" class="form-control" name="age" placeholder="Age" required>
                                     </div>
 
                                     <!-- Gender -->
                                     <div class="form-group">
-                                        <label>Gender</label>
+                                        <label class="d-block">Gender</label>
                                         <div class="form-check form-check-inline">
                                             <input class="form-check-input" type="radio" name="gender" value="male"
                                                 checked>
@@ -108,13 +151,23 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-7"></div>
+                            <div class="col-md-6 my-3 d-none d-md-block">
+                                <div class="container">
+                                    <div class="w-100 d-flex flex-column">
+                                        <h1 class="h1">Basic Proof Information</h1>
+
+                                        <div class="d-flex flex-column">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="row">
-                            <div class="col-md-8"></div>
-                            <div class="col-md-4">
-                                <div class="card shadow p-3">
+                            <div class="col-md-6"></div>
+                            <div class="col-md-6">
+                                <div class="p-3">
                                     <!-- Contact No -->
                                     <div class="form-group">
                                         <label for="contactno">Contact No</label>
@@ -133,8 +186,8 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-md-4">
-                                <div class="card shadow p-3">
+                            <div class="col-md-6">
+                                <div class="p-3">
                                     <!-- Address -->
                                     <div class="form-group">
                                         <label for="address">Address</label>
@@ -165,15 +218,15 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-8"></div>
+                        <div class="col-md-6"></div>
                 </div>
                 <!-- Password -->
-                <div class="form-group w-50 mx-auto">
+                <div class="form-group w-25 mx-auto">
                     <label for="postalcode">Password</label>
                     <input type="password" class="form-control" name="password" required>
                 </div>
 
-                <button class="btn btn-danger btn-block w-25 mx-auto" name="signup">SignUp</button>
+                <button type="submit" class="btn btn-danger btn-block w-25 mx-auto" name="signup">SignUp</button>
                 </form>
             </div>
         </div>

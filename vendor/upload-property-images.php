@@ -3,8 +3,8 @@
     session_start();
    
     if(isset($_POST['upload'])) {
-       
-            var_dump($_FILES);
+       if(isset($_SESSION['vendor'])) {
+           
         $dir = "../uploads/property-uploads/";
         $hallFolder = "hall/";
         $kitchenFolder = "kitchen/";
@@ -54,6 +54,13 @@
         echo "Error Uploadinig";
         }
         // var_dump($propertyImages);
+       } else {
+           header('location: index.php');
+       }
+   }
+
+   if(!isset($_SESSION['vendor'])) {
+       header('location: index.php?direct-access-permission-denied-status=1');
    }
 ?>
 
@@ -113,7 +120,8 @@
                     <div class="form-group col">
                         <!-- hall -->
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="hall" id="validatedCustomFile-hall">
+                            <input type="file" class="custom-file-input" name="hall" id="validatedCustomFile-hall"
+                                required>
                             <label for="validatedCustomFile-hall" class="custom-file-label">Hall</label>
                             <div class="invalid-feedback">Please select proper Images</div>
                         </div>
@@ -122,7 +130,7 @@
                     <!-- Kitchen -->
                     <div class="form-group col">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="kitchen">
+                            <input type="file" class="custom-file-input" name="kitchen" required>
                             <label for="" class="custom-file-label">Kitchen</label>
                         </div>
                     </div>
@@ -131,7 +139,7 @@
                 <!-- Bathroom -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="bedroom">
+                        <input type="file" class="custom-file-input" name="bedroom" required>
                         <label for="" class="custom-file-label">Bedroom</label>
                     </div>
                 </div>
@@ -139,7 +147,7 @@
                 <!-- Bathroom -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="bathroom">
+                        <input type="file" class="custom-file-input" name="bathroom" required>
                         <label for="" class="custom-file-label">Bathroom</label>
                     </div>
                 </div>
@@ -147,7 +155,7 @@
                 <!-- Property -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="property">
+                        <input type="file" class="custom-file-input" name="property" required>
                         <label for="" class="custom-file-label">Property</label>
                     </div>
                 </div>
@@ -155,7 +163,7 @@
                 <!-- House -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="house">
+                        <input type="file" class="custom-file-input" name="house" required>
                         <label for="" class="custom-file-label">House</label>
                     </div>
                 </div>

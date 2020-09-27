@@ -3,17 +3,17 @@
 
     session_start();
 
-    if(isset($_GET['vendor-logout-status'])) {
-        if(isset($_SESSION['vendor']['id'])) {
-            unset($_SESSION['vendor']);
-            header('location: index.php?vendor-logout-process-success=1');
-        } else {
-            header('location: index.php?vendor-must-logged-in');
-        }
-    }
-
     if(!isset($_SESSION['vendor']['id'])) {
         header('location: index.php?vendor-must-logged-in');
+    }
+
+    if(isset($_GET['vendor-logout-status'])) {
+        if(!isset($_SESSION['vendor']['id'])) {
+            unset($_SESSION['vendor']);
+            header('location: ./../signin.php?user-logout-status=1');
+        } else {
+            header('location: ./../signin.php?direct-access-permission-denied-status=1');
+        }
     }
 
 ?>
