@@ -1,3 +1,6 @@
+<?php include 'inc/dbconnection.inc.php'; ?>
+<?php $properties = "SELECT * FROM properties WHERE is_verified > 0 ORDER BY RAND() LIMIT 6"; ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
