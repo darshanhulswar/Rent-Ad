@@ -59,9 +59,9 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow-lg">
         <div class="container">
-            <a href="index.php" class="navbar-brand text-center">
+            <a href="vendor-home.php" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
                 <h6 class="navbar-brand-name py-1">Rent-Ad</h6>
             </a>
@@ -71,8 +71,17 @@
 
             <div class="collapse navbar-collapse" id="main-nav">
 
-                <ul class="navbar-nav mx-auto">
-                    <h2 class="h1 nav-item text-secondary">Vendor Login</h2>
+                <ul class="navbar-nav ml-auto">
+                    <h2 class="h1 nav-item text-secondary">
+                        <i class="fa fa-house"></i>
+                        Upload Property - STEP 1
+                    </h2>
+                </ul>
+
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="vendor-home.php" class="nav-link">Home</a>
+                    </li>
                 </ul>
             </div>
         </div>

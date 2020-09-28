@@ -21,7 +21,7 @@
         session_start();
         $_SESSION['user'] = $_POST;
         var_dump($_SESSION);
-		// header("Location: ../signin.php?registration-successfull");
+		header("Location: ../signin.php?registration-successfull");
 	} else {
 		header("Location: signup.php?try-different-username-or-password-status=1");
     }

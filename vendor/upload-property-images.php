@@ -31,7 +31,6 @@
         move_uploaded_file($_FILES['property']['tmp_name'], $dir.$propertyFolder.$propertyImages[4]);
         move_uploaded_file($_FILES['house']['tmp_name'], $dir.$houseFolder.$propertyImages[5]);
 
-        echo $_FILES['hall']['tmp_name'];
         $i = 0;
         // foreach ($propertyImages as $property) {
         // echo $property . $i . "<br>";
@@ -45,11 +44,12 @@
         $house = $propertyImages[4];
         $prop_id = $_SESSION['property']['id'];
 
-        $sql = "INSERT INTO `images`(`hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES ('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$prop_id')";
+        // $sql = "INSERT INTO `images`(`hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES ('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$prop_id')";
 
-        // $sql = "INSERT INTO images VALUES('".$propertyImages[0]."', '".$propertyImages[1]."', '".$propertyImages[2]."', '".$propertyImages[3]."', '".$propertyImages[4]."','".$_SESSION['property_id']."' )";
+        $sql = "INSERT INTO images ( `hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES('".$propertyImages[0]."', '".$propertyImages[1]."', '".$propertyImages[2]."', '".$propertyImages[3]."', '".$propertyImages[4]."','".$prop_id."' )";
         if($conn->query($sql)) {
-        header('location: property-upload-success.php');
+            // echo "image uploaded";
+        header('location: property-upload-success.php?upload-image-property-success-status=1');
         } else {
         echo "Error Uploadinig";
         }
@@ -92,7 +92,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <div class="container">
-            <a href="index.php" class="navbar-brand text-center">
+            <a href="vendor-home.php" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
                 <h6 class="navbar-brand-name py-1">Rent-Ad</h6>
             </a>
@@ -102,8 +102,20 @@
 
             <div class="collapse navbar-collapse" id="main-nav">
 
-                <ul class="navbar-nav mx-auto">
-                    <h2 class="h1 nav-item text-secondary">Vendor Login</h2>
+                <!-- Navbar Heading  -->
+                <ul class="navbar-nav ml-auto">
+                    <h2 class="h1 nav-item text-secondary">
+                        <i class="fa fa-house"></i>
+                        Upload Property Images - STEP 2
+                    </h2>
+                </ul>
+
+                <!-- Actions -->
+                <ul class="navbar-nav ml-auto">
+                    <h2 class="nav-item text-secondary">
+                        <i class="fa fa-house"></i>
+                        <a href="vendor-home.php" class="nav-link">Home</a>
+                    </h2>
                 </ul>
             </div>
         </div>
