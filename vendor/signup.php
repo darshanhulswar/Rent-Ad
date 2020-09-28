@@ -1,7 +1,37 @@
 <?php
-    include '../inc/dbconnection.inc.php';
-
+    include('../inc/dbconnection.inc.php');
     session_start();
+
+    if(isset($_POST['signup'])) {
+    $firstname = $_POST['firstname'];
+	$lastname = $_POST['lastname'];
+	$dob = $_POST['dob'];
+	$age = $_POST['age'];
+	$gender = $_POST['gender'];
+	$contactno = $_POST['contactno'];
+    $email = $_POST['email'];
+    $aadhar = $_POST['aadhar'];
+	$address = $_POST['address'];
+	$city = $_POST['city'];
+	$state = $_POST['state'];
+	$postalcode = $_POST['postalcode'];
+	$password = $_POST['password'];
+
+	$saveDataQuery = "INSERT INTO `vendors` (`first_name`, `last_name`, `email`, `dob`, `age`, `gender`, `phone`, `address`, `postal_code`, `state`, `city`, `aadhar`, `password`) VALUES ('$firstname', '$lastname', '$email', '$dob', '$age', '$gender', '$contactno', '$address', '$postalcode', '$state', '$city', '$aadhar', '$password')";
+
+
+    
+	if($conn->query($saveDataQuery)){
+        $lastInsertID = "SELECT * FROM vendors WHERE id = LAST_INSERT_ID()";
+        $rawData = $conn->query($lastInsertID);
+        $finalData = $rawData->fetch_assoc();
+        $_SESSION['vendor'] = $finalData;
+        header("Location: vendor-home.php?registration-successfull-status=1");
+	} else {
+		header("Location: signup.php?try-different-username-or-password-status=1");
+    }
+
+    }
 ?>
 
 <!DOCTYPE html>
@@ -214,6 +244,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="p-3">
+                                    <!-- Aadhar -->
+                                    <div class="form-group">
+                                        <label for="address">Aadhar</label>
+                                        <input type="text" class="form-control" name="aadhar"
+                                            placeholder="1123 2542 5875" required>
+                                    </div>
+
                                     <!-- Address -->
                                     <div class="form-group">
                                         <label for="address">Address</label>
@@ -252,7 +289,7 @@
                     <input type="password" class="form-control" name="password" required>
                 </div>
 
-                <button type="submit" class="btn btn-danger btn-block w-25 mx-auto" name="signup">SignUp</button>
+                <input type="submit" value="Signup" class="btn btn-danger btn-block w-25 mx-auto" name="signup">
                 </form>
             </div>
         </div>
