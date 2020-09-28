@@ -1,67 +1,66 @@
 <?php
     include '../inc/dbconnection.inc.php';
     session_start();
-   
+
+
     if(isset($_POST['upload'])) {
-       if(isset($_SESSION['vendor'])) {
-           
-        $dir = "../uploads/property-uploads/";
-        $hallFolder = "hall/";
-        $kitchenFolder = "kitchen/";
-        $bedroomFolder = "bedroom/";
-        $bathroomFolder = "bathroom/";
-        $propertyFolder = "property/";
-        $houseFolder = "house/";
-        $propertyImages = [];
-    
-        foreach ($_FILES as $file) {
-        $propertyImages[] = uniqid().$file['name'];
-        }
+        if(isset($_SESSION['vendor'])) {
+            
 
-        // $i = 0;
-        // foreach ($_FILES as $file) {
-        // move_uploaded_file($file['tmp_name'], $dir.$propertyImages[$i]);
-        // $i++;
-        // }
+            // Upload Folder Setup
+            $dir = "../uploads/property-uploads/";
+            $hallFolder = "hall/";
+            $kitchenFolder = "kitchen/";
+            $bedroomFolder = "bedroom/";
+            $bathroomFolder = "bathroom/";
+            $propertyFolder = "property/";
+            $houseFolder = "house/";
+            $propertyImages = [];
 
-        move_uploaded_file($_FILES['hall']['tmp_name'], $dir.$hallFolder.$propertyImages[0]);
-        move_uploaded_file($_FILES['kitchen']['tmp_name'], $dir.$kitchenFolder.$propertyImages[1]);
-        move_uploaded_file($_FILES['bedroom']['tmp_name'], $dir.$bedroomFolder.$propertyImages[2]);
-        move_uploaded_file($_FILES['bathroom']['tmp_name'], $dir.$bathroomFolder.$propertyImages[3]);
-        move_uploaded_file($_FILES['property']['tmp_name'], $dir.$propertyFolder.$propertyImages[4]);
-        move_uploaded_file($_FILES['house']['tmp_name'], $dir.$houseFolder.$propertyImages[5]);
+            // prefix unique ID to uploaded images
+            foreach ($_FILES as $file) {
+                $propertyImages[] = uniqid().$file['name'];
+            }
 
-        $i = 0;
-        // foreach ($propertyImages as $property) {
-        // echo $property . $i . "<br>";
-        // $i += 1;
-        // }
+            // Store all images name in a variable for further processing
+            $hall = $propertyImages[0];
+            $kitchen = $propertyImages[1];
+            $bedroom = $propertyImages[2];
+            $bathroom = $propertyImages[3];
+            $property = $propertyImages[5];
+            $house = $propertyImages[4];
 
-        $hall = $propertyImages[0];
-        $kitchen = $propertyImages[1];
-        $bathroom = $propertyImages[2];
-        $bedroom = $propertyImages[3];
-        $house = $propertyImages[4];
-        $prop_id = $_SESSION['property']['id'];
+            $property_id = $_SESSION['property']['id'];
 
-        // $sql = "INSERT INTO `images`(`hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES ('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$prop_id')";
+            // Move Uploaded images to rent-ad/uploads/property-uploads
+            move_uploaded_file($_FILES['hall']['tmp_name'], $dir.$hallFolder.$hall);
+            move_uploaded_file($_FILES['kitchen']['tmp_name'], $dir.$kitchenFolder.$kitchen);
+            move_uploaded_file($_FILES['bedroom']['tmp_name'], $dir.$bedroomFolder.$bedroom);
+            move_uploaded_file($_FILES['bathroom']['tmp_name'], $dir.$bathroomFolder.$bathroom);
+            move_uploaded_file($_FILES['property']['tmp_name'], $dir.$propertyFolder.$property);
+            move_uploaded_file($_FILES['house']['tmp_name'], $dir.$houseFolder.$house);
 
-        $sql = "INSERT INTO images ( `hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES('".$propertyImages[0]."', '".$propertyImages[1]."', '".$propertyImages[2]."', '".$propertyImages[3]."', '".$propertyImages[4]."','".$prop_id."' )";
-        if($conn->query($sql)) {
-            // echo "image uploaded";
-        header('location: property-upload-success.php?upload-image-property-success-status=1');
+            $sql = "INSERT INTO images ( `hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$property_id')";
+
+            // Save the uploaded images names into the database
+            if($conn->query($sql)) {
+            echo "image uploaded";
+                header('location: property-upload-success.php?upload-image-property-success-status=1');
+            } else {
+                header('location: image-upload-error.php?property-id=' . $property_id);
+            }
+            
+
+            
         } else {
-        echo "Error Uploadinig";
+            header('location: index.php?direct-access-permission-denied-status=1');
         }
-        // var_dump($propertyImages);
-       } else {
-           header('location: index.php');
-       }
-   }
+    }
 
-   if(!isset($_SESSION['vendor'])) {
-       header('location: index.php?direct-access-permission-denied-status=1');
-   }
+    
+    if(!isset($_SESSION['vendor'])) {
+        header('location: index.php?direct-access-permission-denied-status=1');
+    }
 ?>
 
 <!DOCTYPE html>
@@ -132,8 +131,8 @@
                     <div class="form-group col">
                         <!-- hall -->
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="hall" id="validatedCustomFile-hall"
-                                required>
+                            <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                                class="custom-file-input" name="hall" id="validatedCustomFile-hall" required>
                             <label for="validatedCustomFile-hall" class="custom-file-label">Hall</label>
                             <div class="invalid-feedback">Please select proper Images</div>
                         </div>
@@ -142,7 +141,8 @@
                     <!-- Kitchen -->
                     <div class="form-group col">
                         <div class="custom-file">
-                            <input type="file" class="custom-file-input" name="kitchen" required>
+                            <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
+                                class="custom-file-input" name="kitchen" required>
                             <label for="" class="custom-file-label">Kitchen</label>
                         </div>
                     </div>
@@ -151,7 +151,8 @@
                 <!-- Bathroom -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="bedroom" required>
+                        <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" class="custom-file-input"
+                            name="bedroom" required>
                         <label for="" class="custom-file-label">Bedroom</label>
                     </div>
                 </div>
@@ -159,7 +160,8 @@
                 <!-- Bathroom -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="bathroom" required>
+                        <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" class="custom-file-input"
+                            name="bathroom" required>
                         <label for="" class="custom-file-label">Bathroom</label>
                     </div>
                 </div>
@@ -167,7 +169,8 @@
                 <!-- Property -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="property" required>
+                        <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" class="custom-file-input"
+                            name="property" required>
                         <label for="" class="custom-file-label">Property</label>
                     </div>
                 </div>
@@ -175,14 +178,14 @@
                 <!-- House -->
                 <div class="form-group">
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="house" required>
+                        <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg" class="custom-file-input"
+                            name="house" required>
                         <label for="" class="custom-file-label">House</label>
                     </div>
                 </div>
 
                 <div class="text-center">
-                    <button class="btn btn-outline-danger" type="submit" name="upload">Upload</button>
-
+                    <input type="submit" name="upload" class="btn btn-outline-danger" value="Upload">
                 </div>
             </form>
         </div>

@@ -1,6 +1,6 @@
 <?php
     include '../inc/dbconnection.inc.php';
-    header('refresh: 6; url = vendor-home.php?property-upload-success-status=1');
+    header('refresh: 10; url = vendor-home.php?property-upload-success-status=1');
     session_start();
     var_dump($_SESSION);
    
@@ -46,7 +46,7 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="navbar-nav mx-auto">
-                    <h2 class="h1 nav-item text-secondary">Vendor Login</h2>
+                    <h2 class="h1 nav-item text-secondary">Vendor Upload Process Complete</h2>
                 </ul>
             </div>
         </div>

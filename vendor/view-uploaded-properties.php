@@ -1,7 +1,22 @@
 <?php
     include '../inc/dbconnection.inc.php';
-
     session_start();
+
+    //    Delete Property
+   if(isset($_GET['delete-property-id'])) {
+        if(isset($_SESSION['vendor']['id'])) {
+        $propertyID = $_GET['delete-property-id'];
+        $deletePropertyQuery = "DELETE FROM properties WHERE id = '$propertyID'";
+        if($conn->query($deletePropertyQuery)) {
+            header('loation: view-uploaded-properties.php?prev-property-delete-success-status=1');
+        } else {
+            header('location: delete-property-error.php?property-id' . $propertyID);
+        }
+    } else {
+            header('location: index.php?direct-access-permission-error=1');
+        }
+    }
+
    if(isset($_SESSION['vendor']['id'])) {
         $vendorID = $_SESSION['vendor']['id'];
         $propertiesQuery = "SELECT * FROM properties WHERE vendor_id = '$vendorID'";
@@ -18,20 +33,7 @@
        header('location: index.php?direct-permission-access-violation=1');
    }
 
-//    Delete Property
-   if(isset($_GET['delete-property-id'])) {
-       if(isset($_SESSION['vendor']['id'])) {
-        $propertyID = $_GET['delete-property-id'];
-        $deletePropertyQuery = "DELETE FROM properties WHERE id = '$propertyID'";
-        if($conn->query($deletePropertyQuery)) {
-            echo "Property ID $propertyID Deleted Successfull";
-        } else {
-            echo "ERROR";
-        }
-    } else {
-           header('location: index.php?direct-access-permission-error=1');
-       }
-   }
+
     
 ?>
 
