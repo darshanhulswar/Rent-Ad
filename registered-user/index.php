@@ -50,7 +50,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
+    <nav class="navbar navbar-expand-md bg-light navbar-light p-0">
         <div class="container">
             <a href="index.php" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
@@ -80,13 +80,29 @@
     </nav>
     <!-- Navbar end -->
 
-    <section>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-4">
+    <section id="bg-motion">
 
+        <!-- Hero Motion -->
+        <video autoplay muted loop id="hero-motion-video">
+            <source src="../assets/hero-motions/Hero-Motion.mp4" type="video/mp4">
+        </video>
+
+        <div id="hero-content">
+            <div class="container">
+                <h3 class="h1 text-light">Welcome Back</h3>
+                <h1 class="h1 text-light font-weight-bolder"><?php echo $_SESSION['user']['firstname']; ?> <i
+                        class="fa fa-check bg-primary rounded-circle p-2"></i></h1>
+
+                <p class="lead text-light">
+                    With in few clicks aim direct your house
+                </p>
+
+                <div class="text-left">
+                    <a href="explore.php" class="btn btn-success btn-lg">
+                        <i class="fa fa-building"></i>
+                        Explore All The Way</a>
                 </div>
-                <div class="col-md-8"></div>
+
             </div>
         </div>
     </section>

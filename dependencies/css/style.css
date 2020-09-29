@@ -53,6 +53,7 @@ html {
     text-transform: uppercase;
     padding-left: 1rem;
     padding-right: 1rem;
+    transition: color 0.2s;
 }
 
 .navbar .nav-item.active {
@@ -240,3 +241,21 @@ footer {
 #card-img-top {
 	max-height: 232px;
 }
+
+/* Entire Section */
+section#bg-motion {
+    position: relative;
+}
+
+/* Hero Content */
+div#hero-content {
+    position: absolute;
+    top: 26%;
+    left: 15%
+}
+
+/* Hero Motion Styles */
+video#hero-motion-video {
+    max-width: 100vw;
+}
+
