@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Sep 29, 2020 at 06:36 AM
+-- Generation Time: Sep 29, 2020 at 01:51 PM
 -- Server version: 5.6.12-log
 -- PHP Version: 5.4.16
 
@@ -81,7 +81,7 @@ CREATE TABLE IF NOT EXISTS `images` (
   `property_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `property_id` (`property_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii AUTO_INCREMENT=17 ;
 
 --
 -- Dumping data for table `images`
@@ -89,7 +89,11 @@ CREATE TABLE IF NOT EXISTS `images` (
 
 INSERT INTO `images` (`id`, `hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property`, `property_id`) VALUES
 (6, '5f72a26c7caccel-capitan-5120x2880-5k-4k-wallpaper-8k-forest-osx-apple-mountains-183.jpg', '5f72a26c7cad3el-capitan-5120x2880-5k-4k-wallpaper-8k-forest-osx-apple-mountains-183.jpg', '5f72a26c7cadcel-capitan-5120x2880-5k-4k-wallpaper-8k-forest-osx-apple-mountains-183.jpg', '5f72a26c7cad8el-capitan-5120x2880-5k-4k-wallpaper-8k-forest-osx-apple-mountains-183.jpg', '5f72a26c7cae1el-capitan-5120x2880-5k-4k-wallpaper-8k-forest-osx-apple-mountains-183.jpg', '5f72a26c7cae5el-capitan-5120x2880-5k-4k-wallpaper-8k-forest-osx-apple-mountains-183.jpg', 14),
-(9, '5f72ade309d5bimg (53).jpg', '5f72ade309d63img (53).jpg', '5f72ade309d6cimg (53).jpg', '5f72ade309d67img (53).jpg', '5f72ade309d70img (53).jpg', '5f72ade309d74img (53).jpg', 16);
+(9, '5f72ade309d5bimg (53).jpg', '5f72ade309d63img (53).jpg', '5f72ade309d6cimg (53).jpg', '5f72ade309d67img (53).jpg', '5f72ade309d70img (53).jpg', '5f72ade309d74img (53).jpg', 16),
+(13, '5f7327d3ec11fimg (12).jpg', '5f7327d3ec128img (12).jpg', '5f7327d3ec131img (12).jpg', '5f7327d3ec12dimg (12).jpg', '5f7327d3ec135img (12).jpg', '5f7327d3ec139img (12).jpg', 21),
+(14, '5f732a6c45b88img (21).jpg', '5f732a6c45b91img (21).jpg', '5f732a6c45b9aimg (21).jpg', '5f732a6c45b96img (21).jpg', '5f732a6c45b9eimg (21).jpg', '5f732a6c45ba2img (21).jpg', 23),
+(15, '5f732b70beec9img (27).jpg', '5f732b70beed1img (27).jpg', '5f732b70beee1img (27).jpg', '5f732b70beed8img (27).jpg', '5f732b70beee5img (27).jpg', '5f732b70beee9img (27).jpg', 24),
+(16, '5f732c2e0e2b2img (28).jpeg', '5f732c2e0e2beimg (28).jpeg', '5f732c2e0e2cdimg (28).jpeg', '5f732c2e0e2c6img (28).jpeg', '5f732c2e0e2d4img (28).jpeg', '5f732c2e0e2dbimg (28).jpeg', 26);
 
 -- --------------------------------------------------------
 
@@ -111,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `properties` (
   PRIMARY KEY (`id`),
   KEY `id` (`id`),
   KEY `id_2` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `properties`
@@ -119,7 +123,12 @@ CREATE TABLE IF NOT EXISTS `properties` (
 
 INSERT INTO `properties` (`id`, `name`, `location`, `details`, `bed`, `parking`, `rpm`, `time`, `vendor_id`, `is_verified`) VALUES
 (14, 'Aashiravada', 'Murkatte, Honnavar', 'Arihant Buildcon is happy to introduce its new residential project Arihant Abode at Greater Noida West. This group has successfully completed various residential projects and now it is going to introduce its new project Abode. This group has always fulfilled the desire of customer whether it is for primary needs or secondary needs.\r\n\r\nThis group is always ready to deliver at minimal cost so that the apartments are budget friendly too. In this project Arihant Abode too, both the primary needs and secondary needs are kept in mind and promised to deliver world class homes with world class facilities at minimal cost.\r\n ', 2, 1, '5000', '2020-09-29 02:50:46', 1, 1),
-(16, 'Sannidhi', 'Gersoppa', 'lorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sum', 2, 0, '5000', '2020-09-29 03:45:15', 1, 1);
+(16, 'Sannidhi', 'Gersoppa', 'lorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sumlorem ip sum', 2, 0, '5000', '2020-09-29 03:45:15', 1, 1),
+(21, 'lorem', 'okoo', 'lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem lorem ', 2, 2, '200', '2020-09-29 12:25:21', 1, 0),
+(22, 'kklkl', 'lkkl', 'jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj jjjnj ', 12, 1, '55', '2020-09-29 12:30:34', 1, 0),
+(23, 'kjjjk', 'kjkjj', 'jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj jkj ', 665, 565, '444', '2020-09-29 12:36:42', 1, 0),
+(24, 'lk', 'kkllk', 'hvjgghhkhjkjhhvjgghhkhjkjh hvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjhhvjgghhkhjkjh', 5, 555, '5', '2020-09-29 12:41:03', 1, 0),
+(26, 'hjhjh', 'jhjhj', '554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb554jjbjb', 5455, 54545, '454544', '2020-09-29 12:44:15', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -144,7 +153,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=ascii COMMENT='Users of Rent-Ad Services Ltd.' AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=ascii COMMENT='Users of Rent-Ad Services Ltd.' AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `users`
@@ -152,10 +161,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `firstname`, `lastname`, `dob`, `age`, `gender`, `contactno`, `email`, `address`, `city`, `state`, `postalcode`, `password`) VALUES
 (1, 'Darshan', 'Hulswar', '1999-11-28', '21', 'male', '9989784458', 'darshan@gmail.com', 'Arolli Mundgod', 'Honnavar', 'Karnataka', '581334', 'root'),
-(2, 'Darshan', 'Hulswar', '1999-11-28', '21', 'male', '9482255786', 'darshan2@gmail.com', 'Arolli Mundgod', 'Honnavar', 'Karnataka', '581334', 'root'),
-(14, 'vinayak', 'naik', '2020-09-30', '21', 'male', '7406120281', 'vinayak@gmail.com', 'Arolli Mundgod', 'Honnavar', 'Karnataka', '581334', 'root'),
-(15, 'Darshan', 'Hulswar', '2020-09-10', '21', 'male', '9482255786', 'darshan23@gmail.com', 'Arolli Mundgod', 'Honnavar', 'Karnataka', '581334', 'nbjhbj'),
-(16, 'Goutam', 'Naik', '2020-09-08', '21', 'male', '9482255786', 'goutamnaik@gmail.com', 'KOnalli', 'Kumta', 'Karnataka', '5813369', 'root');
+(29, 'Goutam', 'Naik', '2020-09-01', '21', 'male', '9482255786', 'goutamnaik@gmail.com', 'Konalli', 'Kumta', 'Karnataka', '5813369', 'root'),
+(30, 'root', 'root', '1999-02-08', '21', 'male', '1234567890', 'root@gmail.com', 'root for all', 'root', 'root', '896321', 'root');
 
 -- --------------------------------------------------------
 
