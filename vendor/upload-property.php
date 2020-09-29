@@ -22,6 +22,7 @@
                 $data = $result->fetch_assoc();
                 $_SESSION['property'] = $data;
                 $propertyID = $_SESSION['property']['id'];
+                $_SESSION['property']['upload']['textual-format'] = 1;
                 header("location: upload-property-images.php?property-id=" . $propertyID);
             }
     }
@@ -116,13 +117,13 @@
 
                     <div class="form-group col">
                         <label for="">Bed</label>
-                        <input class="form-control" type="text" name="bed" placeholder="Bedrooms" autocomplete="off"
+                        <input class="form-control" type="number" name="bed" placeholder="Bedrooms" autocomplete="off"
                             required>
                     </div>
 
                     <div class="form-group col">
                         <label for="">Parking</label>
-                        <input class="form-control" type="text" name="parking" placeholder="Parking Lot"
+                        <input class="form-control" type="number" name="parking" placeholder="Parking Lot"
                             autocomplete="off" required>
                     </div>
                 </div>

@@ -2,6 +2,9 @@
     include '../inc/dbconnection.inc.php';
 
     session_start();
+    // To prevent direct access of upload property-images file
+    $_SESSION['property']['upload']['textual-format'] = 0;
+
 
     if(!isset($_SESSION['vendor']['id'])) {
         header('location: index.php?vendor-must-logged-in');

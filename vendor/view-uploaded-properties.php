@@ -17,6 +17,16 @@
         }
     }
 
+    
+    if(isset($_GET['vendor-logout-status'])) {
+        if(isset($_SESSION['vendor'])) {
+            unset($_SESSION['vendor']);
+            header('location: index.php?vendor-logout-status=1');
+        } else {
+            header('location: index.php?direct-access-permission-denied=1');
+        }
+    }
+
    if(isset($_SESSION['vendor']['id'])) {
         $vendorID = $_SESSION['vendor']['id'];
         $propertiesQuery = "SELECT * FROM properties WHERE vendor_id = '$vendorID'";
@@ -30,7 +40,7 @@
             }
         }
    } else {
-       header('location: index.php?direct-permission-access-violation=1');
+       header('location: index.php?direct-access-permission-denied=1');
    }
 
 

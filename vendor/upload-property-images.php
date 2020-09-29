@@ -45,7 +45,8 @@
 
                 // Save the uploaded images names into the database
                 if($conn->query($sql)) {
-                echo "image uploaded";
+                    echo "image uploaded";
+                    unset($_SESSION['property']['upload']['textual-format']);
                     header('location: property-upload-success.php?upload-image-property-success-status=1');
                 } else {
                     header('location: image-upload-error.php?property-id=' . $property_id);
@@ -59,10 +60,17 @@
         }
     }
 
-    
-    if(!isset($_SESSION['vendor'])) {
+    // If vendor logged in but directly accessing upload property images page
+    if(isset($_SESSION['vendor']) && ($_SESSION['property']['upload']['textual-format'] === 0)) {
+            header('location: upload-property.php?stage-one-process-status=0');
+    }
+
+    // if vendor is not logged in and textual data not uploaded then handle this
+    if(!isset($_SESSION['vendor']) && !isset($_SESSION['property']['upload']['textual-format'])) {
         header('location: index.php?direct-access-permission-denied-status=1');
     }
+
+   
 ?>
 
 <!DOCTYPE html>

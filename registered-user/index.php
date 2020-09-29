@@ -3,18 +3,19 @@
     session_start();
 
     if(!isset($_SESSION['user'])) {
-        header('location: ../signin.php?direct-access-permission-denied-status=1');
+        header('location: ../signin.php?vendor-must-logged-in');
     }
 
     if(isset($_GET['user-logout-status'])) {
         if(isset($_SESSION['user']['id'])) {
-            session_unset();
-            session_destroy();
-            header('location: ./../signin.php?user-logout-status=1');
+            unset($_SESSION['user']);
+            header('location: ../signin.php?user-logout-status=1');
         } else {
-            header('location: ./../signin.php?direct-access-permission-denied-status=1');
+            header('location: ./../signin.php?direct-access-permission-denied-status=10');
         }
     }
+
+   
 
     if(isset($_SESSION['user'])) {
         // $getRandomPropertyQuery = "SELECT * FROM properties ORDER BY RAND() LIMIT 6";

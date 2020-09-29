@@ -19,9 +19,11 @@
 
 	if($conn->query($saveDataQuery)){
         session_start();
-        $_SESSION['user'] = $_POST;
-        var_dump($_SESSION);
-		header("Location: ../signin.php?registration-successfull");
+        $getLastEntryQuery = "SELECT * FROM `users` WHERE id = LAST_INSERT_ID()";
+        $rawData = $conn->query($getLastEntryQuery);
+        $finalData = $rawData->fetch_assoc();
+        $_SESSION['user'] = $finalData;
+		header("Location: ./registered-user/index.php?user-registration-complete-status=1");
 	} else {
 		header("Location: signup.php?try-different-username-or-password-status=1");
     }
