@@ -16,6 +16,11 @@
         }
     }
 
+    if(isset($_SESSION['user'])) {
+        // $getRandomPropertyQuery = "SELECT * FROM properties ORDER BY RAND() LIMIT 6";
+        $getRandomPropertyQuery = "SELECT * FROM properties INNER JOIN images ON properties.is_verified > 0 AND properties.id = images.property_id";
+    }
+
 ?>
 
 <!DOCTYPE html>

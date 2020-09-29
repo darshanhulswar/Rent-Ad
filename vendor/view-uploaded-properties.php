@@ -191,8 +191,9 @@
 
                     <!-- Property Images -->
                     <li class="nav-item" role="presentation">
-                        <a class="nav-link" id="img-<?php echo $i; ?>" data-toggle="tab" href="#img-<?php echo $i; ?>"
-                            role="tab" aria-controls="img-<?php echo $i; ?>" aria-selected="false">Property Images</a>
+                        <a class="nav-link" id="img-tab-<?php echo $i; ?>" data-toggle="tab"
+                            href="#img-<?php echo $i; ?>" role="tab" aria-controls="img-<?php echo $i; ?>"
+                            aria-selected="false">Property Images</a>
                     </li>
                 </ul>
                 <div class="tab-content" id="myTabContent">
@@ -247,12 +248,70 @@
                             $getImagesQuery = "SELECT * FROM images WHERE property_id = '$propertyID'";
 
                             $rawData = $conn->query($getImagesQuery);
-                            var_dump($rawData);
                         ?>
+
+                        <?php foreach($rawData as $propertyImage): ?>
+
+                        <div class="container">
+                            <div class="row my-2">
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $i; ?>"
+                                        href="../uploads/property-uploads/hall/<?php echo $propertyImage['hall']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/hall/<?php echo $propertyImage['hall']; ?>"
+                                            alt="Hall">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $i; ?>"
+                                        href="../uploads/property-uploads/kitchen/<?php echo $propertyImage['kitchen']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/kitchen/<?php echo $propertyImage['kitchen']; ?>"
+                                            alt="Kitchen">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $i; ?>"
+                                        href="../uploads/property-uploads/bedroom/<?php echo $propertyImage['bedroom']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/bedroom/<?php echo $propertyImage['bedroom']; ?>"
+                                            alt="Bedroom">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $i; ?>"
+                                        href="../uploads/property-uploads/bathroom/<?php echo $propertyImage['bathroom']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/bathroom/<?php echo $propertyImage['bathroom']; ?>"
+                                            alt="Bathroom">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $i; ?>"
+                                        href="../uploads/property-uploads/house/<?php echo $propertyImage['house']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/house/<?php echo $propertyImage['house']; ?>"
+                                            alt="House">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $i; ?>"
+                                        href="../uploads/property-uploads/property/<?php echo $propertyImage['property']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/property/<?php echo $propertyImage['property']; ?>"
+                                            alt="Property">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
 
-                <div class="text-center">
+                <div class="text-center mt-3">
                     <a href="view-uploaded-properties.php?delete-property-id=<?php echo $allProperties['uploaded-properties'][$i]['id'] ?>"
                         class="btn btn-danger">
                         Delete Property

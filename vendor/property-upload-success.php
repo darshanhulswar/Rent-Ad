@@ -2,9 +2,6 @@
     include '../inc/dbconnection.inc.php';
     header('refresh: 10; url = vendor-home.php?property-upload-success-status=1');
     session_start();
-    var_dump($_SESSION);
-   
-   
 ?>
 
 <!DOCTYPE html>

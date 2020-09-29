@@ -6,51 +6,53 @@
     if(isset($_POST['upload'])) {
         if(isset($_SESSION['vendor'])) {
             
+            if($_SESSION['property']['id']) {
+                
+                // Upload Folder Setup
+                $dir = "../uploads/property-uploads/";
+                $hallFolder = "hall/";
+                $kitchenFolder = "kitchen/";
+                $bedroomFolder = "bedroom/";
+                $bathroomFolder = "bathroom/";
+                $propertyFolder = "property/";
+                $houseFolder = "house/";
+                $propertyImages = [];
 
-            // Upload Folder Setup
-            $dir = "../uploads/property-uploads/";
-            $hallFolder = "hall/";
-            $kitchenFolder = "kitchen/";
-            $bedroomFolder = "bedroom/";
-            $bathroomFolder = "bathroom/";
-            $propertyFolder = "property/";
-            $houseFolder = "house/";
-            $propertyImages = [];
+                // prefix unique ID to uploaded images
+                foreach ($_FILES as $file) {
+                    $propertyImages[] = uniqid().$file['name'];
+                }
 
-            // prefix unique ID to uploaded images
-            foreach ($_FILES as $file) {
-                $propertyImages[] = uniqid().$file['name'];
-            }
+                // Store all images name in a variable for further processing
+                $hall = $propertyImages[0];
+                $kitchen = $propertyImages[1];
+                $bedroom = $propertyImages[2];
+                $bathroom = $propertyImages[3];
+                $property = $propertyImages[5];
+                $house = $propertyImages[4];
 
-            // Store all images name in a variable for further processing
-            $hall = $propertyImages[0];
-            $kitchen = $propertyImages[1];
-            $bedroom = $propertyImages[2];
-            $bathroom = $propertyImages[3];
-            $property = $propertyImages[5];
-            $house = $propertyImages[4];
+                $property_id = $_SESSION['property']['id'];
 
-            $property_id = $_SESSION['property']['id'];
+                // Move Uploaded images to rent-ad/uploads/property-uploads
+                move_uploaded_file($_FILES['hall']['tmp_name'], $dir.$hallFolder.$hall);
+                move_uploaded_file($_FILES['kitchen']['tmp_name'], $dir.$kitchenFolder.$kitchen);
+                move_uploaded_file($_FILES['bedroom']['tmp_name'], $dir.$bedroomFolder.$bedroom);
+                move_uploaded_file($_FILES['bathroom']['tmp_name'], $dir.$bathroomFolder.$bathroom);
+                move_uploaded_file($_FILES['property']['tmp_name'], $dir.$propertyFolder.$property);
+                move_uploaded_file($_FILES['house']['tmp_name'], $dir.$houseFolder.$house);
 
-            // Move Uploaded images to rent-ad/uploads/property-uploads
-            move_uploaded_file($_FILES['hall']['tmp_name'], $dir.$hallFolder.$hall);
-            move_uploaded_file($_FILES['kitchen']['tmp_name'], $dir.$kitchenFolder.$kitchen);
-            move_uploaded_file($_FILES['bedroom']['tmp_name'], $dir.$bedroomFolder.$bedroom);
-            move_uploaded_file($_FILES['bathroom']['tmp_name'], $dir.$bathroomFolder.$bathroom);
-            move_uploaded_file($_FILES['property']['tmp_name'], $dir.$propertyFolder.$property);
-            move_uploaded_file($_FILES['house']['tmp_name'], $dir.$houseFolder.$house);
+                $sql = "INSERT INTO images ( `hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property`, `property_id`) VALUES('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$property', '$property_id')";
 
-            $sql = "INSERT INTO images ( `hall`, `kitchen`, `bathroom`, `bedroom`, `house`, `property_id`) VALUES('$hall', '$kitchen', '$bathroom', '$bedroom', '$house', '$property_id')";
-
-            // Save the uploaded images names into the database
-            if($conn->query($sql)) {
-            echo "image uploaded";
-                header('location: property-upload-success.php?upload-image-property-success-status=1');
+                // Save the uploaded images names into the database
+                if($conn->query($sql)) {
+                echo "image uploaded";
+                    header('location: property-upload-success.php?upload-image-property-success-status=1');
+                } else {
+                    header('location: image-upload-error.php?property-id=' . $property_id);
+                }
             } else {
-                header('location: image-upload-error.php?property-id=' . $property_id);
+                header('location: upload-property.php?direct-access-permission-denied-status=1');
             }
-            
-
             
         } else {
             header('location: index.php?direct-access-permission-denied-status=1');
