@@ -7,6 +7,7 @@
         if(isset($_SESSION['vendor']['id'])) {
         $propertyID = $_GET['delete-property-id'];
         $deletePropertyQuery = "DELETE FROM properties WHERE id = '$propertyID'";
+        
         if($conn->query($deletePropertyQuery)) {
             header('loation: view-uploaded-properties.php?prev-property-delete-success-status=1');
         } else {
@@ -19,11 +20,11 @@
 
     
     if(isset($_GET['vendor-logout-status'])) {
-        if(isset($_SESSION['vendor'])) {
+        if(isset($_SESSION['vendor']['id'])) {
             unset($_SESSION['vendor']);
             header('location: index.php?vendor-logout-status=1');
         } else {
-            header('location: index.php?direct-access-permission-denied=1');
+            header('location: index.php?vendor-must-logged-in');
         }
     }
 
@@ -39,8 +40,10 @@
                 $allProperties['uploaded-properties'][] = $property;
             }
         }
-   } else {
-       header('location: index.php?direct-access-permission-denied=1');
+   }
+
+   if(!isset($_SESSION['vendor']['id'])) {
+        header('location: index.php?vendor-must-logged-in');
    }
 
 

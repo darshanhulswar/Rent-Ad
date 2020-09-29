@@ -1,5 +1,6 @@
 <?php
     include '../inc/dbconnection.inc.php';
+    $invalidCredentialsStatus = 0;
     if(isset($_POST['login'])) {
 
         $email = $_POST['email'];
@@ -18,11 +19,11 @@
                 $_SESSION['admin']['password'] = $data['password'];
                 header('location: dashboard.php');
             } else {
-                header('location: invalid-credentials.php');
+                $invalidCredentialsStatus = 1;
             }
             
         } else {
-            header('location: invalid-credentials.php');
+            $invalidCredentialsStatus = 1;
         }
     } 
 ?>
@@ -66,9 +67,22 @@
     <section id="login-board" class="mt-5">
         <div class="container">
             <div class="row">
-                <div class="col-sm-1 col-md-4 col-lg-4"></div>
-                <div class="col-sm-10 col-md-4 col-lg-4 mt-5">
+                <div class="col-sm-11 col-md-10 col-lg-6 mt-5">
                     <div class="card px-5 pt-5 pb-2">
+
+                        <!-- Invalid Credentials Alert -->
+                        <?php if($invalidCredentialsStatus === 1): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <span>Invalid</span><strong class="text-danger"> Email </strong>
+                            or<strong class="text-danger"> Password </strong> Please enter the
+                            valid Username or Password
+
+                            <button type="button" data-dismiss="alert" aler-label="close" class="close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <?php endif; ?>
+
                         <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
                             <!-- Email -->
                             <div class="form-group">
@@ -94,7 +108,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="col-sm-1 col-md-4 col-lg-4"></div>
+                <div class="col-sm-1 col-md-2 col-lg-6"></div>
             </div>
         </div>
     </section>
