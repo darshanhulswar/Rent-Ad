@@ -238,8 +238,13 @@ footer {
     font-weight: bolder;
 }
 
-#card-img-top {
-	max-height: 232px;
+.card-img-top {
+    min-height: 232px !important;
+	max-height: 232px !important;
+}
+
+.card-text {
+    height: 60px;
 }
 
 /* Entire Section */
@@ -250,8 +255,8 @@ section#bg-motion {
 /* Hero Content */
 div#hero-content {
     position: absolute;
-    top: 26%;
-    left: 15%
+    top: 20%;
+    left: 10%
 }
 
 /* Hero Motion Styles */
