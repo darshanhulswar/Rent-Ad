@@ -23,6 +23,23 @@
         foreach($rawData as $property) {
             $finalData[] = $property;
         }
+
+        // Count Registered User
+        $contUsersQuery = "SELECT COUNT(*) FROM users";
+        $countUsers = $conn->query($contUsersQuery); 
+
+        // Count Total Vendors
+        $countVendorsQuery = "SELECT COUNT(*) FROM vendors";
+        $countVendors = $conn->query($countVendorsQuery);
+
+        $countPropertyQuery = "SELECT COUNT(*) FROM properties";
+        $countOfProperties = $conn->query($countPropertyQuery);
+        $toalProperties = $countOfProperties->fetch_assoc();
+
+        $countOfUsers = $countUsers->fetch_assoc();
+        $countOfVendors = $countVendors->fetch_assoc();
+        
+        $totalUsers = $countOfUsers['COUNT(*)'] + $countOfVendors['COUNT(*)'];
     }
 
 ?>
@@ -114,7 +131,7 @@
     <!-- Popular properties section -->
     <section class="my-5">
         <div class="container">
-            <div class="display-3 text-center">Popular Properties</div>
+            <div class="display-1 text-center font-weight-thinner">Popular Properties</div>
             <div class="row">
                 <?php foreach($finalData as $singleProperty): ?>
                 <div class="col-md-4">
@@ -184,6 +201,35 @@
             <p class="text-center lead text-secondary">
                 Real Estate Rent Services
             </p>
+        </div>
+    </section>
+
+    <!-- counter up section -->
+    <section class="">
+        <div class="container">
+            <div class="card w-70 illustration-background shadow-0 py-3">
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Users</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto">
+                                <i class="fa fa-users mr-2"></i><?php echo $totalUsers; ?>
+                            </h1>
+                        </div>
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Houses</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto">
+                                <i class="fa fa-home mr-2"></i><?php echo $toalProperties['COUNT(*)'] ?>
+                            </h1>
+                        </div>
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Branches</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto"><i
+                                    class="fa fa-building-o mr-2"></i>1</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 

@@ -17,10 +17,20 @@
 
 
 /*#################### Preloader ###############################################################*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@400;600;700&display=swap');
+
 html {
     scroll-behavior: smooth;
 }
 
+body {
+    overflow-x: hidden;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.font-weight-thinner {
+    font-weight: 100;
+}
 #preloader {
   background-color: #fff;  
   position: fixed;
@@ -262,5 +272,12 @@ div#hero-content {
 /* Hero Motion Styles */
 video#hero-motion-video {
     max-width: 100vw;
+}
+
+.illustration-background {
+    background: url('../../assets/img/background1.jpg');
+    background-position: center;
+    background-size: cover;
+    min-height: 220px;
 }
 

@@ -2,7 +2,7 @@
     include '../inc/dbconnection.inc.php';
     session_start();
 
-    if($_SESSION['user']['id'] < 0) {
+    if(!isset($_SESSION['user']['id'])) {
         header('location: ../signin.php?user-must-logged-in');
     }
 
