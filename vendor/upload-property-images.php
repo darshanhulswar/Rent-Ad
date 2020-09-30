@@ -144,7 +144,7 @@
                             <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
                                 class="custom-file-input" name="hall" id="validatedCustomFile-hall" required>
                             <label for="validatedCustomFile-hall" class="custom-file-label">Hall</label>
-                            <div class="invalid-feedback">Please select proper Images</div>
+                            <!-- <div class="invalid-feedback">Please select proper Images</div> -->
                         </div>
                     </div>
 
