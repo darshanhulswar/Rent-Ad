@@ -26,6 +26,7 @@ html {
 body {
     overflow-x: hidden;
     font-family: 'Source Sans Pro', sans-serif;
+    background-color: #eee;
 }
 
 .font-weight-thinner {
@@ -271,7 +272,7 @@ div#hero-content {
 
 /* Hero Motion Styles */
 video#hero-motion-video {
-    max-width: 100vw;
+    min-width: 100%;
 }
 
 .illustration-background {
