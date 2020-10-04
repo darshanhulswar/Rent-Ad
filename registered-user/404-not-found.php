@@ -1,7 +1,33 @@
 <?php
     include '../inc/dbconnection.inc.php';
-    header('refresh: 5; url = vendor-home.php?property-upload-success-status=1');
     session_start();
+
+    if(!isset($_SESSION['user'])) {
+        header('location: ../signin.php?user-must-logged-in');
+    }
+
+   
+    if(isset($_SESSION['user']['id'])) {
+        // $getRandomPropertyQuery = "SELECT properties.id, properties.name, properties.details, properties.location, properties.bed, properties.parking, properties.rpm, properties.vendor_id, images.house FROM properties INNER JOIN images ON  properties.is_verified > 0 AND properties.id = images.property_id";
+
+        // Count Registered User
+        $contUsersQuery = "SELECT COUNT(*) FROM users";
+        $countUsers = $conn->query($contUsersQuery); 
+
+        // Count Total Vendors
+        $countVendorsQuery = "SELECT COUNT(*) FROM vendors";
+        $countVendors = $conn->query($countVendorsQuery);
+
+        $countPropertyQuery = "SELECT COUNT(*) FROM properties";
+        $countOfProperties = $conn->query($countPropertyQuery);
+        $toalProperties = $countOfProperties->fetch_assoc();
+
+        $countOfUsers = $countUsers->fetch_assoc();
+        $countOfVendors = $countVendors->fetch_assoc();
+        
+        $totalUsers = $countOfUsers['COUNT(*)'] + $countOfVendors['COUNT(*)'];
+    }
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +40,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor Property Upload Success</title>
+    <title>Rent-Ad | Explore Properties</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -30,7 +56,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md bg-light navbar-light p-0">
         <div class="container">
             <a href="index.php" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
@@ -43,26 +69,72 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="navbar-nav mx-auto">
-                    <h2 class="h1 nav-item text-secondary">Vendor Upload Process Complete</h2>
+
+                    <li class="nav-item">
+                        <a href="index.php" class="nav-link">
+                            <i class="fa fa-user-times-out"></i> Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <span class="nav-link text-dark">
+                            <?php echo $_SESSION['user']['firstname']; ?>
+                        </span>
+                    </li>
+
                 </ul>
             </div>
         </div>
     </nav>
     <!-- Navbar end -->
 
-    <section>
+    <!-- counter up section -->
+    <section class=" my-5">
         <div class="container">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col">
-                    <h1 class="display-2 text-center text-success">Property Upload Success!</h1>
-                    <p class="text-center lead text-secondary">You will beredirected to vendor home within 5 seconds
-                        please wait...</p>
+            <div class="card w-70 illustration-background shadow-0 py-3">
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Users</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto">
+                                <i class="fa fa-users mr-2"></i><?php echo $totalUsers; ?>
+                            </h1>
+                        </div>
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Houses</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto">
+                                <i class="fa fa-home mr-2"></i><?php echo $toalProperties['COUNT(*)'] ?>
+                            </h1>
+                        </div>
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Branches</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto"><i
+                                    class="fa fa-building-o mr-2"></i>1</h1>
+                        </div>
+                    </div>
                 </div>
-                <div class="col"></div>
             </div>
         </div>
     </section>
+
+    <!-- Hero Motion -->
+    <section class="my-5">
+        <div class="container">
+            <div class="w-50">
+                <h1 class="display-2 text-danger">Search Result Not Found</h1>
+
+                <div class="text-center">
+                    <a href="explore.php" class="btn btn-info">
+                        <i class="fa fa-back"></i> Back
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
 
     <!-- Footer -->
     <footer class="bg-dark">
@@ -114,8 +186,8 @@
     </footer>
     <!-- Footer End -->
 
-
     <!-- Script Tags -->
+    <script src="../dependencies/js/popper.js"></script>
     <?php include 'inc/scripts.inc.php' ?>
 </body>
 

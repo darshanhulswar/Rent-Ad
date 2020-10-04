@@ -2,6 +2,9 @@
     include('../inc/dbconnection.inc.php');
     session_start();
 
+    $duplicationEntryError = 0;
+
+
     if(isset($_POST['signup'])) {
     $firstname = $_POST['firstname'];
 	$lastname = $_POST['lastname'];
@@ -28,7 +31,7 @@
         $_SESSION['vendor'] = $finalData;
         header("Location: vendor-home.php?registration-successfull-status=1");
 	} else {
-		header("Location: signup.php?try-different-username-or-password-status=1");
+		$duplicationEntryError = 1;
     }
 
     }
@@ -95,6 +98,20 @@
             <h4 class="card-header display-4 text-center bg-light m-3 card-head"><strong>Register Now</strong></h4>
             <div class="card-body">
                 <div class="container">
+
+                    <!-- Duplication Entry Error Alert -->
+                    <?php if($duplicationEntryError === 1): ?>
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                        <span>Invalid</span><strong class="text-danger"> Aadhar </strong>
+                        or<strong class="text-danger"> Password </strong> you've entered seems to be already exist in
+                        our application please try different Aadhar or Email ID to proceed
+
+                        <button type="button" data-dismiss="alert" aler-label="close" class="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <?php endif; ?>
+
                     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" class="form" method="POST">
                         <div class="row">
                             <div class="col-md-6 my-3">

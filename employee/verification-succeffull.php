@@ -61,7 +61,13 @@
 
     <section>
         <div class="conatiner">
-            <h1 class="display-2 text-success">Success</h1>
+            <div class="w-50 mx-auto">
+                <h1 class="display-1 text-center text-success">Success</h1>
+                <p class="lead text-center">Property Verification Done</p>
+                <p class="lead text-center">You'll be redirected to <span class="font-weight-bolder">Employees
+                        Dashboard</span> Page with in 5 seconds please
+                    wait....</p>
+            </div>
         </div>
     </section>
 

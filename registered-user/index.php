@@ -72,7 +72,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md bg-light navbar-light p-0">
         <div class="container">
-            <a href="index.php" class="navbar-brand text-center">
+            <a href="<?php echo $_SERVER['PHP_SELF'];  ?>" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
                 <h6 class="navbar-brand-name py-1">Rent-Ad</h6>
             </a>
@@ -83,10 +83,21 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="navbar-nav mx-auto">
+
+                    <li class="nav-item active">
+                        <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="nav-link">Home</a>
+
+                    </li>
+
                     <li class="nav-item">
                         <span class="nav-link">
                             <?php echo $_SESSION['user']['firstname']; ?>
                         </span>
+                    </li>
+
+                    <!-- Feedback -->
+                    <li class="nav-item">
+                        <a href="registered-user-feedback.php" class="nav-link">Feedback</a>
                     </li>
 
                     <li class="nav-item">

@@ -23,6 +23,9 @@
                 $_SESSION['vendor']['gender'] = $data['gender'];
                 $_SESSION['vendor']['phone'] = $data['phone'];
                 $_SESSION['vendor']['address'] = $data['address'];
+                $_SESSION['vendor']['state'] = $data['state'];
+                $_SESSION['vendor']['city'] = $data['city'];
+                $_SESSION['vendor']['postal_code'] = $data['postal_code'];
                 $_SESSION['vendor']['aadhar'] = $data['aadhar'];
                 $_SESSION['vendor']['password'] = $data['password'];
                 header('location: vendor-home.php');

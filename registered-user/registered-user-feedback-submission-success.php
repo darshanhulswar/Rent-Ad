@@ -1,7 +1,19 @@
 <?php
     include '../inc/dbconnection.inc.php';
-    header('refresh: 5; url = vendor-home.php?property-upload-success-status=1');
+    header('refresh: 3; location: index.php?feedback-sent-status=1');
+
     session_start();
+   
+    if(!isset($_SESSION['user']['id'])) {
+        header('location: ../signin.php?user-must-logged-in');
+    }
+
+    if(isset($_SESSION['user']['feedback-saved-status'])) {
+
+    } else {
+        header('location: registered-user-feedback.php?fill-out-this-form-to-get-next-confirmation');
+    }  
+
 ?>
 
 <!DOCTYPE html>
@@ -14,7 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor Property Upload Success</title>
+    <title>Rent-Ad | User Feedback Form Submission Complete</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -30,9 +42,9 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="container">
-            <a href="index.php" class="navbar-brand text-center">
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
                 <h6 class="navbar-brand-name py-1">Rent-Ad</h6>
             </a>
@@ -43,7 +55,9 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="navbar-nav mx-auto">
-                    <h2 class="h1 nav-item text-secondary">Vendor Upload Process Complete</h2>
+                    <li class="nav-item active">
+                        <span class="nav-link font-weight-bolder h1">Feedback Saved</span>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -52,14 +66,12 @@
 
     <section>
         <div class="container">
-            <div class="row">
-                <div class="col"></div>
-                <div class="col">
-                    <h1 class="display-2 text-center text-success">Property Upload Success!</h1>
-                    <p class="text-center lead text-secondary">You will beredirected to vendor home within 5 seconds
-                        please wait...</p>
+            <div class="success-bg">
+                <div class="w-50">
+                    <h1 class="display-3 text-success">Feedback Submitted</h1>
+                    <p class="lead text-center">Pleae wait...</p>
+                    <p class="lead text-center">You will be redirected to home page within 3 seconds.</p>
                 </div>
-                <div class="col"></div>
             </div>
         </div>
     </section>
@@ -113,7 +125,6 @@
         </div>
     </footer>
     <!-- Footer End -->
-
 
     <!-- Script Tags -->
     <?php include 'inc/scripts.inc.php' ?>

@@ -81,6 +81,11 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
+                        <span title="Registered User"
+                            class="nav-link"><?php echo $_SESSION['user']['firstname']; ?></span>
+                    </li>
+
+                    <li class="nav-item">
                         <a href="vendor-home.php" class="nav-link">Home</a>
                     </li>
                 </ul>
@@ -95,13 +100,13 @@
             <form method="POST" action="upload-property.php" class="form w-50 my-5 p-5 shadow rouded mx-auto">
                 <h2 class="display-4 text-center border-bottom">Post Details</h2>
                 <div class="form-row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-12 col-md-6">
                         <label for="">House Name</label>
                         <input class="form-control" type="text" autofocus="true" name="name" placeholder="Property Name"
                             autocomplete="off" required>
                     </div>
 
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-sm-12 col-md-6">
                         <label for="">House Location</label>
                         <input class="form-control" type="text" name="location" placeholder="Property Location"
                             autocomplete="off" required>
@@ -109,19 +114,19 @@
                 </div>
 
                 <div class="form-row">
-                    <div class="form-group col">
+                    <div class="form-group col-sm-12 col-md-4">
                         <label for="">Rent Per Month</label>
                         <input class="form-control" type="number" name="rpm" placeholder="Rent Per Month"
                             autocomplete="off" required>
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-sm-12 col-md-4">
                         <label for="">Bed</label>
                         <input class="form-control" type="number" name="bed" placeholder="Bedrooms" autocomplete="off"
                             required>
                     </div>
 
-                    <div class="form-group col">
+                    <div class="form-group col-sm-12 col-md-4">
                         <label for="">Parking</label>
                         <input class="form-control" type="number" name="parking" placeholder="Parking Lot"
                             autocomplete="off" required>

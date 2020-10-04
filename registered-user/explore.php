@@ -37,13 +37,18 @@
     }
 
     if(isset($_POST['search'])) {
-       var_dump($_POST);
+        $searchLocation = $_POST['location'];
 
-       $propertyQuery = "SELECT * FROM properties INNER JOIN ON images WHERE properties.location LIKE %'".$_POST["location"]."'%";
+       $propertyQuery = "SELECT * FROM `properties` INNER JOIN images ON properties.location LIKE '%$searchLocation%' AND images.property_id = properties.id;";
+       
+       if($rawResult = $conn->query($propertyQuery)) {
+            $finalSearchResults[] = $rawResult->fetch_assoc();
+            echo count($finalSearchResults);
 
-       $rawResult = $conn->query($propertyQuery);
+       } else {
+            echo "ERROR: DB_ERR";
+    }
 
-       var_dump($rawResult);
     }
 
 ?>
@@ -87,8 +92,15 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="navbar-nav mx-auto">
+
                     <li class="nav-item">
-                        <span class="nav-link">
+                        <a href="index.php" class="nav-link">
+                            <i class="fa fa-user-times-out"></i> Home
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <span class="nav-link text-dark">
                             <?php echo $_SESSION['user']['firstname']; ?>
                         </span>
                     </li>

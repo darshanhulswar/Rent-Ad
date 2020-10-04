@@ -58,7 +58,7 @@
     <!-- alert -->
     <section>
         <div class="conatiner">
-            <h1 class="display-1 text-center">House Removed</h1>
+            <h1 class="display-1 text-center w-50 mx-auto">House Removed</h1>
         </div>
     </section>
 

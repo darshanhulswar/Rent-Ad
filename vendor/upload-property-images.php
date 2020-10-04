@@ -112,18 +112,10 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <!-- Navbar Heading  -->
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav mx-auto">
                     <h2 class="h1 nav-item text-secondary">
                         <i class="fa fa-house"></i>
                         Upload Property Images - STEP 2
-                    </h2>
-                </ul>
-
-                <!-- Actions -->
-                <ul class="navbar-nav ml-auto">
-                    <h2 class="nav-item text-secondary">
-                        <i class="fa fa-house"></i>
-                        <a href="vendor-home.php" class="nav-link">Home</a>
                     </h2>
                 </ul>
             </div>
@@ -138,7 +130,7 @@
                 class="form p-5 my-5 w-50 shadow rounded-lg mx-auto">
                 <h2 class="display-4">Upload Property</h2>
                 <div class="form-row">
-                    <div class="form-group col">
+                    <div class="form-group col-sm-12 col-md-6">
                         <!-- hall -->
                         <div class="custom-file">
                             <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
@@ -149,7 +141,7 @@
                     </div>
 
                     <!-- Kitchen -->
-                    <div class="form-group col">
+                    <div class="form-group col-sm-12 col-md-6">
                         <div class="custom-file">
                             <input type="file" accept="image/x-png,image/gif,image/jpeg,image/jpg"
                                 class="custom-file-input" name="kitchen" required>

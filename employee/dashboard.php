@@ -71,7 +71,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-light">
         <div class="container">
-            <a href="index.php" class="navbar-brand text-center">
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="rent-ad">
                 <h6 class="navbar-brand-name py-1">Rent-Ad</h6>
             </a>
@@ -145,11 +145,13 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
+                    <div class="alert alert-success mt-3 font-weight-bolder">Click on Verified House to reject the
+                        approved house</div>
                     <h1 class="h1 text-success">Verified Properties</h1>
 
                     <div class="table-responsive">
-                        <table class="table table-sm table-hover">
-                            <thead>
+                        <table class="table table-sm table-hover table-bordered">
+                            <thead class="thead-dark">
                                 <td>Sl No.</td>
                                 <td>ID</td>
                                 <td>Name</td>
@@ -171,7 +173,7 @@
                                     <td><?php echo $verifiedHouse['id'] ?></td>
                                     <td><?php echo $verifiedHouse['name'] ?></td>
                                     <td><?php echo $verifiedHouse['location'] ?></td>
-                                    <td><?php echo $verifiedHouse['details'] ?></td>
+                                    <td class="font-weight-bolder"><?php echo $verifiedHouse['details'] ?></td>
                                     <td><?php echo $verifiedHouse['bed'] ?></td>
                                     <td><?php echo $verifiedHouse['parking'] ?></td>
                                     <td><?php echo $verifiedHouse['rpm'] ?></td>
