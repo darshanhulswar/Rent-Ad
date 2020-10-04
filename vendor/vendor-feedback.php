@@ -28,7 +28,7 @@
 
             if($conn->query($saveFeedbackQuery)) {
                 $_SESSION['feedback-saved-status'] = 1;
-            // header('location: vendor-feedback-submission-success.php?feedback-submit-success-status=1');
+                header('location: vendor-feedback-submission-success.php?feedback-submit-success-status=1');
 
             }
         } else {
@@ -104,7 +104,7 @@
 
 
 
-    <section>
+    <section class="my-5">
         <div class="container">
             <h1 class="display-4 text-center text-secondary">We always here from you to improve our services. <i
                     class="fa fa-smile"></i></h1>
@@ -151,7 +151,7 @@
                         Feedback
                         Description</label>
                     <textarea class="form-control font-weight-bolder text-info" name="description" id="description"
-                        cols="30" rows="10" placeholder="Type in your feedback..."></textarea>
+                        cols="900" rows="10" placeholder="Type in your feedback..."></textarea>
                 </div>
 
                 <div class="text-center">

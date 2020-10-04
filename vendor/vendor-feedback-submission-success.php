@@ -1,7 +1,8 @@
 <?php
     include '../inc/dbconnection.inc.php';
-
     session_start();
+
+    header('refresh: 3; url = vendor-home.php?feedback-sent-successfull');
    
     if(!isset($_SESSION['vendor']['id'])) {
         header('location: index.php?vendor-must-logged-in');
@@ -82,7 +83,12 @@
 
     <section>
         <div class="container">
-
+            <div class="w50">
+                <h1 class="display-1 text-success">Feedback Successfull Sent to our Teams</h1>
+                <p class="text-center lead">Our Customer will contact you soon...</p>
+                <p class="text-center lead text-danger">You'll be redirected to home page within 3 seconds please
+                    wait...</p>
+            </div>
         </div>
     </section>
 

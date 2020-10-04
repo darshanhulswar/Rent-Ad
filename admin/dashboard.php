@@ -14,7 +14,30 @@
     
     // Check Admin Session Status
     if(isset($_SESSION['admin'])) {
-       
+        $getRandomPropertyQuery = "SELECT properties.id, properties.name, properties.details, properties.location, properties.bed, properties.parking, properties.rpm, properties.vendor_id, images.house FROM properties INNER JOIN images ON  properties.is_verified > 0 AND properties.id = images.property_id ORDER BY RAND() LIMIT 6";
+
+        $rawData = $conn->query($getRandomPropertyQuery);
+        $finalData = [];
+        foreach($rawData as $property) {
+            $finalData[] = $property;
+        }
+
+        // Count Registered User
+        $contUsersQuery = "SELECT COUNT(*) FROM users";
+        $countUsers = $conn->query($contUsersQuery); 
+
+        // Count Total Vendors
+        $countVendorsQuery = "SELECT COUNT(*) FROM vendors";
+        $countVendors = $conn->query($countVendorsQuery);
+
+        $countPropertyQuery = "SELECT COUNT(*) FROM properties";
+        $countOfProperties = $conn->query($countPropertyQuery);
+        $toalProperties = $countOfProperties->fetch_assoc();
+
+        $countOfUsers = $countUsers->fetch_assoc();
+        $countOfVendors = $countVendors->fetch_assoc();
+        
+        $totalUsers = $countOfUsers['COUNT(*)'] + $countOfVendors['COUNT(*)'];
         
     } else {
         header('location: index.php');
@@ -71,6 +94,77 @@
             </div>
         </div>
     </nav>
+
+    <!-- counter up section -->
+    <section class="">
+        <div class="container border-bottom border-dark">
+            <h1 class="text-center mt-4 text-secondary font-weight-bolder">User and House Stats</h1>
+            <div class="card w-70 illustration-background shadow-0 py-3">
+                <div class="container pt-3">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Users</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto">
+                                <i class="fa fa-users mr-2"></i><?php echo $totalUsers; ?>
+                            </h1>
+                        </div>
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Houses</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto">
+                                <i class="fa fa-home mr-2"></i><?php echo $toalProperties['COUNT(*)'] ?>
+                            </h1>
+                        </div>
+                        <div class="col-md-4">
+                            <h1 class="display-4 text-light text-center font-weight-bolder">Branches</h1>
+                            <h1 class="display-4 text-secondary text-center bg-light rounded-pill w-50 mx-auto"><i
+                                    class="fa fa-building-o mr-2"></i>1</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="card p-5 bg-houses">
+                        <h1 class="text-center">
+                            <i class="fa fa-home d-block"></i> House
+                        </h1>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="card p-5">
+                        <h1 class="text-center bg-users">
+                            <i class="fa fa-users d-block"></i> Users
+                        </h1>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card p-5 bg-vendors">
+                        <h1 class="text-center">
+                            <i class="fa fa-user d-block"></i> Vendors
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-lg-4">
+                    <div class="card p-5 bg-feedbacks">
+                        <a href="feedback-controller.php" class="h1 text-center text-decoration-none">
+                            <i class="fa fa-comments-o d-block"></i> Feedback
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
     <!-- Script Tags -->

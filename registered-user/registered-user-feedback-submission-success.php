@@ -1,6 +1,6 @@
 <?php
     include '../inc/dbconnection.inc.php';
-    header('refresh: 3; location: index.php?feedback-sent-status=1');
+    header('refresh: 3; url= index.php?feedback-sent-status=1');
 
     session_start();
    

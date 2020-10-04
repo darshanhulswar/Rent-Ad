@@ -24,7 +24,7 @@
             $userPhone = $_POST['phone'];
             $Description = $_POST['description'];
 
-            $saveFeedbackQuery = "INSERT INTO `user_feedback`(`user_id`, `user_email`, `phone`, `feedback_date`, `desrciption`) VALUES ('$userID', '$userEmail', '$userPhone', CURDATE(), '$Description')";
+            $saveFeedbackQuery = "INSERT INTO `user_feedback`(`user_id`, `user_name`, `user_email`, `phone`, `feedback_date`, `desrciption`) VALUES ('$userID', '$userName', '$userEmail', '$userPhone', CURDATE(), '$Description')";
 
             if($conn->query($saveFeedbackQuery)) {
                 $_SESSION['user']['feedback-saved-status'] = 1;
