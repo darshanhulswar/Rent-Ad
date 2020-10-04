@@ -1,7 +1,9 @@
 <?php
     include '../inc/dbconnection.inc.php';
     session_start();
-    $userDeletedStatus = 0;
+
+    $deleteVendorStatus = 0;
+    
     
     if(!isset($_SESSION['admin'])) {
         header('location: index.php?admin-must-logged-in');
@@ -9,25 +11,25 @@
         
         // Users Details
         {
-            $viewUserQuery = "SELECT * FROM `users`";
-            $usersRawData = $conn->query($viewUserQuery);
+            $viewVendorQuery = "SELECT * FROM `vendors`";
+            $vendorsRawData = $conn->query($viewVendorQuery);
 
-            $usersFinalData = [];
+            $vendorsFinalData = [];
 
-            foreach($usersRawData as $singleUser) {
-                $usersFinalData[] = $singleUser;
+            foreach($vendorsRawData as $singleVendor) {
+                $vendorsFinalData[] = $singleVendor;
             }
         }
     
     }
 
 
-    if(isset($_GET['user-id'])) {
+    if(isset($_GET['vendor-id'])) {
         if(isset($_SESSION['admin'])) {
-            $userID = $_GET['user-id'];
-            $deleteUser = "DELETE FROM `users` WHERE id = '$userID'";
+            $vendorID = $_GET['vendor-id'];
+            $deleteUser = "DELETE FROM `vendors` WHERE id = '$vendorID'";
             if($conn->query($deleteUser)) {
-                $userDeletedStatus = 1;
+                $deleteVendorStatus = 1;
             }
         } else {
             header('location: index.php?admin-must-logged-in');
@@ -43,7 +45,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rent-Ad | Admin Feedback Controller</title>
+    <title>Rent-Ad | Admin Vendor Controller</title>
 
     <!-- Favicon and Stylesheets -->
     <?php include 'inc/links.inc.php'; ?>
@@ -67,7 +69,8 @@
                 <ul class="navbar-nav mx-auto">
 
                     <li class="nav-item  text-dark">
-                        <a href="user-controller.php" class="nav-link"><i class="fa fa-cog mr-2"></i>User Controller</a>
+                        <a href="vendor-controller.php" class="nav-link"><i class="fa fa-cog mr-2"></i>Vendor
+                            Controller</a>
                     </li>
 
                     <li class="nav-item  text-dark">
@@ -83,20 +86,19 @@
     <section id="view-users-section">
         <div class="container">
             <!-- User Deleted Alert -->
-            <?php if($userDeletedStatus === 1): ?>
+            <?php if($deleteVendorStatus === 1): ?>
             <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert">
-                User Delete successfull.
+                Vendor Deleted successfull.
 
                 <button type="button" data-dismiss="alert" aler-label="close" class="close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <?php header('refresh: 3; url= delete-user.php'); ?>
-
+            <?php header('refresh: 3; url= delete-vendor.php'); ?>
             <?php endif; ?>
 
-            <h1 class="h1 text-center">Total Users <?php echo  count($usersFinalData); ?></h1>
+            <h1 class="h1 text-center">Total Vendors <?php echo  count($vendorsFinalData); ?></h1>
             <div class="table-responsive-md">
                 <table class="table table-hover table-striped table-sm">
                     <thead class="thead-primary">
@@ -119,23 +121,24 @@
                     </thead>
 
                     <tbody>
-                        <?php $i = 1; foreach($usersFinalData as $singleUSer): ?>
+                        <?php $i = 1; foreach($vendorsFinalData as $singleVendor): ?>
                         <tr>
                             <td><?php echo $i++; ?></td>
-                            <td><?php echo $singleUSer['id']; ?></td>
-                            <td><?php echo $singleUSer['firstname']; ?></td>
-                            <td><?php echo $singleUSer['lastname']; ?></td>
-                            <td><?php echo $singleUSer['dob']; ?></td>
-                            <td><?php echo $singleUSer['age']; ?></td>
-                            <td><?php echo $singleUSer['gender']; ?></td>
-                            <td><?php echo $singleUSer['contactno']; ?></td>
-                            <td><?php echo $singleUSer['email']; ?></td>
-                            <td><?php echo $singleUSer['address']; ?></td>
-                            <td><?php echo $singleUSer['city']; ?></td>
-                            <td><?php echo $singleUSer['state']; ?></td>
-                            <td><?php echo $singleUSer['postalcode']; ?></td>
-                            <td><a href="<?php echo $_SERVER['PHP_SELF'];?>?user-id=<?php echo $singleUSer['id'] ?>"
-                                    class="btn btn-danger btn-sm font-weight-bolder">Delete</a></td>
+                            <td><?php echo $singleVendor['id']; ?></td>
+                            <td><?php echo $singleVendor['first_name']; ?></td>
+                            <td><?php echo $singleVendor['last_name']; ?></td>
+                            <td><?php echo $singleVendor['dob']; ?></td>
+                            <td><?php echo $singleVendor['age']; ?></td>
+                            <td><?php echo $singleVendor['gender']; ?></td>
+                            <td><?php echo $singleVendor['phone']; ?></td>
+                            <td><?php echo $singleVendor['email']; ?></td>
+                            <td><?php echo $singleVendor['address']; ?></td>
+                            <td><?php echo $singleVendor['city']; ?></td>
+                            <td><?php echo $singleVendor['state']; ?></td>
+                            <td><?php echo $singleVendor['postal_code']; ?></td>
+                            <td class="bg-secondary font-weight-bolder"><?php echo $singleVendor['aadhar']; ?></td>
+                            <td><a href="<?php echo $_SERVER['PHP_SELF']; ?>?vendor-id=<?php echo $singleVendor['id']; ?>"
+                                    class="btn btn-danger btn-sm"><i class="fa fa-trash mr-2"></i>Delete</a></td>
                         </tr>
                         <?php endforeach; ?>
                     </tbody>
