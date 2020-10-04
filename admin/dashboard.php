@@ -129,26 +129,32 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4">
-                    <div class="card p-5 bg-houses">
-                        <h1 class="text-center">
-                            <i class="fa fa-home d-block"></i> House
-                        </h1>
-                    </div>
+                    <a href="house-controller.php" class="text-decoration-none">
+                        <div class="card p-5 bg-houses">
+                            <h1 class="text-center">
+                                <i class="fa fa-home d-block"></i> House
+                            </h1>
+                        </div>
+                    </a>
                 </div>
                 <div class="col-lg-4">
-                    <div class="card p-5">
-                        <h1 class="text-center bg-users">
-                            <i class="fa fa-users d-block"></i> Users
-                        </h1>
-                    </div>
+                    <a href="user-controller.php" class="text-decoration-none">
+                        <div class="card p-5">
+                            <h1 class="text-center bg-users">
+                                <i class="fa fa-users d-block"></i> Users
+                            </h1>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="col-lg-4">
-                    <div class="card p-5 bg-vendors">
-                        <h1 class="text-center">
-                            <i class="fa fa-user d-block"></i> Vendors
-                        </h1>
-                    </div>
+                    <a href="vendor-controller.php" class="text-decoration-none">
+                        <div class="card p-5 bg-vendors">
+                            <h1 class="text-center">
+                                <i class="fa fa-user d-block"></i> Vendors
+                            </h1>
+                        </div>
+                    </a>
                 </div>
 
             </div>
