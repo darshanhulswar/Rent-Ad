@@ -62,7 +62,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="container">
-            <a href="index.php" class="navbar-brand text-center">
+            <a href="<?php echo $_SERVER['PHP_SELF']; ?>" class="navbar-brand text-center">
                 <img src="../assets/icons/favicon.png" alt="">
                 <h6 class="navbar-brand-name py-1">Rent-Ad</h6>
             </a>
@@ -80,7 +80,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a href="signin.php" class="nav-link">
-                            jj
+                            Signin
                         </a>
                     </li>
                 </ul>
@@ -88,68 +88,6 @@
         </div>
     </nav>
     <!-- Navbar end -->
-
-    <!--  Carousel      -->
-    <section id="showcase">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="9000">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item carousel-image-1 active">
-                    <div class="container">
-                        <div
-                            class="carousel-caption d-none d-sm-block text-right text-secondary mb-5 bg-trans p-5 rounded">
-                            <h1 class="display-3 animated zoomIn slow text-light">Best Rent Property Selling</h1>
-                            <p class="lead animated zoomIn delay-2s text-light">Rent-House Adviser offers a one-stop
-                                destination
-                                for all Property needs</p>
-                            <a href="#" class="btn btn-danger btn-lg animated zoomIn delay-3s">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item carousel-image-2">
-                    <div class="container">
-                        <div class="carousel-caption d-none d-sm-block text-secondary mb-5 bg-trans p-5 rounded">
-                            <h1 class="display-3 animated zoomIn slow text-light">Get out and stretch your imagination
-                            </h1>
-                            <p class="lead animated zoomIn delay-2s text-light">Plan a different kind of getaway to
-                                uncover the
-                                hidden gems near you.
-                            </p>
-                            <a href="#" class="btn btn-primary btn-lg animated zoomIn delay-3s">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item carousel-image-3">
-                    <div class="container">
-                        <div
-                            class="carousel-caption d-none d-sm-block text-left text-secondary mb-5 bg-trans p-5 rounded">
-                            <h1 class="display-3 animated zoomIn slow text-light">Let’s find a home that’s perfect for
-                                you.℠
-                            </h1>
-                            <p class="lead animated zoomIn delay-2s text-light">Search confidently with your trusted
-                                source of homes for sale or rent
-                            </p>
-                            <a href="#" class="btn btn-success btn-lg animated zoomIn delay-3s">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-
-            <a href="#myCarousel" data-slide="next" class="carousel-control-next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
-        </div>
-    </section>
-    <!--  Carousel End  -->
 
     <!-- signup form -->
     <div class="container">

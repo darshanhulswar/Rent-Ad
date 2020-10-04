@@ -116,7 +116,7 @@
                     <!-- User Email -->
                     <div class="form-group">
                         <input class="form-control" type="email" name="email" id="email" placeholder="email"
-                            minlength="10" maxlength="20" autofocus="on" autocomplete="off" required>
+                            minlength="10" maxlength="50" autofocus="on" autocomplete="off" required>
                         <small class="form-text text-muted">Email ID</small>
                     </div>
 

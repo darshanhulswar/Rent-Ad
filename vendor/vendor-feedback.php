@@ -2,10 +2,7 @@
     include '../inc/dbconnection.inc.php';
 
     session_start();
-    // To prevent direct access of upload property-images file
-    $_SESSION['property']['upload']['textual-format'] = 0;
-
-
+   
     if(!isset($_SESSION['vendor']['id'])) {
         header('location: index.php?vendor-must-logged-in');
     }
@@ -19,6 +16,25 @@
         }
     }
 
+    if(isset($_POST['submit'])) {
+        if(isset($_SESSION['vendor']['id'])) {
+            $vendorID = $_POST['id'];
+            $vendorName = $_POST['name'];
+            $vendorEmail = $_POST['email'];
+            $vendorPhone = $_POST['phone'];
+            $vendorDescription = $_POST['description'];
+
+            $saveFeedbackQuery = "INSERT INTO `vendor_feedback`(`vendor_id`, `vendor_name`, `email`, `phone`, `feedback_date`, `description`) VALUES ('$vendorID', '$vendorName', '$vendorEmail', '$vendorPhone', CURDATE(), '$vendorDescription')";
+
+            if($conn->query($saveFeedbackQuery)) {
+                $_SESSION['feedback-saved-status'] = 1;
+            // header('location: vendor-feedback-submission-success.php?feedback-submit-success-status=1');
+
+            }
+        } else {
+            header('location: ./../signin.php?direct-access-permission-denied-status=1');
+        }
+    }
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +47,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Title -->
-    <title>Rent-Ad | Vendor Home</title>
+    <title>Rent-Ad | Vendor Feedback Section</title>
 
     <!-- Link Tags -->
     <?php include 'inc/links.inc.php'; ?>
@@ -60,11 +76,11 @@
             <div class="collapse navbar-collapse" id="main-nav">
 
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
+                    <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="properties.php" class="nav-link">Properties</a></li>
                     <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link">About Us</a></li>
-                    <li class="nav-item"><a href="vendor-feedback.php" class="nav-link">Feedback</a></li>
+                    <li class="nav-item active"><a href="vendor-feedback.php" class="nav-link">Feedback</a></li>
                 </ul>
 
                 <!-- SignIn and SignOut Links -->
@@ -86,102 +102,62 @@
     </nav>
     <!-- Navbar end -->
 
-    <!--  Carousel      -->
-    <section id="showcase">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="9000">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item carousel-image-1 active">
-                    <div class="container">
-                        <div
-                            class="carousel-caption d-none d-sm-block text-right text-secondary mb-5 bg-trans p-5 rounded">
-                            <h1 class="display-3 animated zoomIn slow text-light">Best Rent Property Selling</h1>
-                            <p class="lead animated zoomIn delay-2s text-light">Rent-House Adviser offers a one-stop
-                                destination
-                                for all Property needs</p>
-                            <a href="#" class="btn btn-danger btn-lg animated zoomIn delay-3s">Read More</a>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="carousel-item carousel-image-2">
-                    <div class="container">
-                        <div class="carousel-caption d-none d-sm-block text-secondary mb-5 bg-trans p-5 rounded">
-                            <h1 class="display-3 animated zoomIn slow text-light">Get out and stretch your imagination
-                            </h1>
-                            <p class="lead animated zoomIn delay-2s text-light">Plan a different kind of getaway to
-                                uncover the
-                                hidden gems near you.
-                            </p>
-                            <a href="#" class="btn btn-primary btn-lg animated zoomIn delay-3s">Read More</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="carousel-item carousel-image-3">
-                    <div class="container">
-                        <div
-                            class="carousel-caption d-none d-sm-block text-left text-secondary mb-5 bg-trans p-5 rounded">
-                            <h1 class="display-3 animated zoomIn slow text-light">Let’s find a home that’s perfect for
-                                you.℠
-                            </h1>
-                            <p class="lead animated zoomIn delay-2s text-light">Search confidently with your trusted
-                                source of homes for sale or rent
-                            </p>
-                            <a href="#" class="btn btn-success btn-lg animated zoomIn delay-3s">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a href="#myCarousel" data-slide="prev" class="carousel-control-prev">
-                <span class="carousel-control-prev-icon"></span>
-            </a>
-
-            <a href="#myCarousel" data-slide="next" class="carousel-control-next">
-                <span class="carousel-control-next-icon"></span>
-            </a>
-        </div>
-    </section>
-    <!--  Carousel End  -->
-
-    <!-- Menu Section -->
-    <section>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="upload-property.php" class="text-decoration-none">
-                        <div class="card p-5">
-                            <h4 class="h4 text-center font-weight-bolder">Post a Property</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="view-uploaded-properties.php?vendor-id=<?php echo $_SESSION['vendor']['id']; ?>"
-                        class="text-decoration-none">
-                        <div class="card p-5">
-                            <h4 class="h4 text-center font-weight-bolder">View Properties</h4>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <div class="card p-5">
-                        <a href="vendor-profile.php" class="text-decoration-none">
-                            <h4 class="h4 text-center font-weight-bolder">Profile</h4>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <section>
         <div class="container">
-            <div class="text-secondary">
-            </div>
+            <h1 class="display-4 text-center text-secondary">We always here from you to improve our services. <i
+                    class="fa fa-smile"></i></h1>
+            <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST" class="form w-50 mx-auto">
+
+                <div class="form-row">
+                    <!-- Vendor ID -->
+                    <div class="form-group col">
+                        <input class="form-control font-weight-bolder text-info" type="text" name="id" id="id"
+                            value="<?php echo $_SESSION['vendor']['id'] ?>" readonly>
+                        <small class="text-dark font-weight-bolder">Vendor ID</small>
+                    </div>
+
+                    <!-- Vendor Name -->
+                    <div class="form-group col">
+                        <input class="form-control font-weight-bolder text-info" type="text" name="name" id="name"
+                            value="<?php echo $_SESSION['vendor']['first_name'] ?>" readonly>
+                        <small class="text-dark font-weight-bolder">Name</small>
+                    </div>
+                </div>
+
+                <!-- UI Section -->
+
+                <div class="form-row">
+                    <!-- Vendor Email -->
+                    <div class="form-group col">
+                        <input class="form-control font-weight-bolder text-info" type="text" name="email" id="email"
+                            value="<?php echo $_SESSION['vendor']['email'] ?>" readonly>
+                        <small class="text-dark font-weight-bolder">Email</small>
+
+                    </div>
+
+                    <!-- Vendor Phone -->
+                    <div class="form-group col">
+                        <input class="form-control font-weight-bolder text-info" type="text" name="phone" id="phone"
+                            value="<?php echo $_SESSION['vendor']['phone'] ?>" readonly>
+                        <small class="text-dark font-weight-bolder">Phone</small>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="font-weight-bolder" for="feedback"><i class="fa fa-envelope text-success"></i>
+                        Feedback
+                        Description</label>
+                    <textarea class="form-control font-weight-bolder text-info" name="description" id="description"
+                        cols="30" rows="10" placeholder="Type in your feedback..."></textarea>
+                </div>
+
+                <div class="text-center">
+                    <input name="submit" type="submit" value="Send Feedback" class="btn btn-success">
+                </div>
+            </form>
         </div>
     </section>
 
