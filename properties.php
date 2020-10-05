@@ -1,3 +1,16 @@
+<?php include 'inc/dbconnection.inc.php'; ?>
+
+<?php   $properties = "SELECT * FROM properties WHERE is_verified > 0 ORDER BY time DESC LIMIT 3"; ?>
+<?php   $data = $conn->query($properties);
+        $finalHouseDetails = [];
+        foreach($data as $house) {
+        $finalHouseDetails[] = $house; 
+
+        }
+
+        // var_dump($finalHouseDetails);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -39,7 +52,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item active"><a href="properties.php" class="nav-link">Properties</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="vendor/index.php" class="nav-link">Vendor</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="contact.php" class="nav-link">Contact Us</a></li>
                 </ul>
@@ -55,47 +68,41 @@
 
     <section id="properties" class="my-4">
         <div class="container">
-            <div class="row">
-                <div class="w-50 shadow mx-auto rounded-lg border">
-                    <ul class="nav nav-tabs" id="myTab" role="tablist">
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab"
-                                aria-controls="home" aria-selected="true">Home</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
-                                aria-controls="profile" aria-selected="false">Profile</a>
-                        </li>
-                        <li class="nav-item" role="presentation">
-                            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab"
-                                aria-controls="contact" aria-selected="false">Contact</a>
-                        </li>
-                    </ul>
-                    <div class="tab-content" id="myTabContent">
-                        <div class="tab-pane fade show active p-4" id="home" role="tabpanel" aria-labelledby="home-tab">
-                            <h1 class="h5">Glass House <span class="text-muted small">Honnavar</span></h5>
-                        </div>
-                        <div class="tab-pane fade p-4" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo consequatur molestiae
-                            atque aspernatur sapiente veniam rerum! Autem eligendi itaque culpa nemo, similique magnam
-                            libero! Iste nesciunt placeat nemo impedit voluptate!
-                        </div>
-                        <div class="tab-pane fade p-4" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ut, veniam ullam vitae qui
-                            exercitationem optio incidunt nihil officia reprehenderit, modi doloremque aspernatur,
-                            quibusdam perferendis pariatur voluptate vero autem. Mollitia!
+            <!-- property details in textual format -->
+            <section class="my-5">
+                <div class="container">
+                    <h1 class="display-4 text-center text-secondary text-danger">As a unregistered you won't get much
+                        benefit of our
+                        service</h1>
+                    <h1 class="h1 text-center text-muted">Signup withus and get more out of our services</h1>
+                    <h1 class="h2 text-center text-info">Just to go through properties, we listed some of them</h1>
+                    <div class="table-responsive">
+                        <table class="table table-sm table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Sl No.</th>
+                                    <th>Property Name</th>
+                                    <th>Location</th>
+                                    <th>Bedrooms</th>
+                                    <th>Parking Lots</th>
+                                </tr>
+                            </thead>
 
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ut, veniam ullam vitae qui
-                            exercitationem optio incidunt nihil officia reprehenderit, modi doloremque aspernatur,
-                            quibusdam perferendis pariatur voluptate vero autem. Mollitia!
-
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Non ut, veniam ullam vitae qui
-                            exercitationem optio incidunt nihil officia reprehenderit, modi doloremque aspernatur,
-                            quibusdam perferendis pariatur voluptate vero autem. Mollitia!
-                        </div>
+                            <tbody>
+                                <?php $i = 1; foreach($finalHouseDetails as $house): ?>
+                                <tr>
+                                    <td><?php echo $i++; ?></td>
+                                    <td><?php echo $house['name'] ?></td>
+                                    <td><?php echo $house['location'] ?></td>
+                                    <td><?php echo $house['bed'] ?></td>
+                                    <td><?php echo $house['parking'] ?></td>
+                                </tr>
+                                <?php endforeach; ?>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
     </section>
 

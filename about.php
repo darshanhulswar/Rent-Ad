@@ -39,7 +39,7 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="properties.php" class="nav-link">Properties</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="vendor/index.php" class="nav-link">Vendor</a></li>
                     <li class="nav-item active"><a href="about.php" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="contact.php" class="nav-link">Contact Us</a></li>
                 </ul>
@@ -52,6 +52,33 @@
         </div>
     </nav>
     <!--  Navbar End  -->
+
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h1 class="h1 text-secondary text-center">Lead Developer</h1>
+                    <h2 class="h2 font-weight-bolder text-secondary text-center">Darshan Hulswar</h2>
+                </div>
+                <div class="col-md-6">
+                    <h1 class="h1 text-secondary text-center">Teammate</h1>
+                    <h2 class="h2 font-weight-bolder text-secondary text-center">Vinayak Ravi</h2>
+                </div>
+            </div>
+
+            <p class="lead text-center text-secondary my-5">
+                To make this project we have used various online resources and <span class="font-weight-bolder">Git SCM
+                    and GitHub to manage our projects source code</span>
+            </p>
+
+
+            <p class="lead text-center text-secondary my-5">
+                And we have extremely used <span class="text-primary">Design Resources for Webdevelopers By Brad
+                    Traversy</span> to make our site UI nice
+                looking
+            </p>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-dark">

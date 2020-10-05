@@ -81,8 +81,7 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <span title="Registered User"
-                            class="nav-link"><?php echo $_SESSION['user']['firstname']; ?></span>
+                        <span title="Vendor" class="nav-link"><?php echo $_SESSION['vendor']['first_name']; ?></span>
                     </li>
 
                     <li class="nav-item">

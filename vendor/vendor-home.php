@@ -61,16 +61,13 @@
 
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
-                    <li class="nav-item"><a href="properties.php" class="nav-link">Properties</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
-                    <li class="nav-item"><a href="about.php" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="vendor-feedback.php" class="nav-link">Feedback</a></li>
                 </ul>
 
                 <!-- SignIn and SignOut Links -->
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="signin.php" class="nav-link">
+                        <a href="" class="nav-link">
                             <?php echo $_SESSION['vendor']['first_name']; ?>
                         </a>
                     </li>

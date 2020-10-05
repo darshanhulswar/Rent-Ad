@@ -1,7 +1,8 @@
 <?php
     include '../inc/dbconnection.inc.php';
     session_start();
-
+    $searchResult = 0; 
+    $finalSearchResults = [];
     if(!isset($_SESSION['user'])) {
         header('location: ../signin.php?user-must-logged-in');
     }
@@ -40,12 +41,20 @@
         $searchLocation = $_POST['location'];
 
        $propertyQuery = "SELECT * FROM `properties` INNER JOIN images ON properties.location LIKE '%$searchLocation%' AND images.property_id = properties.id;";
-       
+       $finalSearchResults = [];
        if($rawResult = $conn->query($propertyQuery)) {
-            $finalSearchResults[] = $rawResult->fetch_assoc();
-            echo count($finalSearchResults);
+            foreach($rawResult as $house) {
+                $finalSearchResults[] = $house;
+            }
 
-       } else {
+            if(sizeof($finalSearchResults) <= 0) {
+                $searchResult = 0;
+            } 
+
+            if(sizeof($finalSearchResults) > 1) {
+                $searchResult = 1;
+            }
+        } else {
             echo "ERROR: DB_ERR";
     }
 
@@ -116,7 +125,7 @@
     </nav>
     <!-- Navbar end -->
 
-    <!-- Hero Motion -->
+    <!-- Search Section -->
     <section id="bg-explore">
         <div class="container py-5">
             <form action="<?php echo $_SERVER['PHP_SELF'];  ?>" method="post">
@@ -129,14 +138,170 @@
                             class="btn block btn-lg btn-outline-primary mx-auto">
                     </div>
                 </div>
-
-                <div class="d-block w-100">
-                </div>
             </form>
         </div>
     </section>
 
+    <section class="my-5">
+        <div class="container">
+            <!-- Search Result Not FOund Alert -->
+            <?php if($searchResult < 0): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <h1 class="display-1 text-center">Search Result Not Found</h1>
+                <h1 class="display-1 text-center">404</h1>
 
+                <button type="button" data-dismiss="alert" aler-label="close" class="close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <?php endif; ?>
+
+            <h1 class="text-center display-3"> Results will go here</h1>
+
+            <!-- Search Results -->
+            <?php foreach($finalSearchResults as $oneHouse): ?>
+            <div class="card my-3 p-3">
+                <ul class="nav nav-tabs" id="myTab-<?php echo $oneHouse['id']; ?>" role="tablist">
+
+                    <!-- Home 1stTab -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="house-tab-<?php echo $oneHouse['id']; ?>" data-toggle="tab"
+                            href="#house-<?php echo $oneHouse['id']; ?>" role="tab"
+                            aria-controls="house-<?php echo $oneHouse['id']; ?>" aria-selected="true">House</a>
+                    </li>
+
+                    <!-- Home Details -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="details-tab-<?php echo $oneHouse['id']; ?>" data-toggle="tab"
+                            href="#details-<?php echo $oneHouse['id']; ?>" role="tab"
+                            aria-controls="details-<?php echo $oneHouse['id']; ?>" aria-selected="false">Details</a>
+                    </li>
+
+                    <!-- Contact Vendor -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="contact-tab-<?php echo $oneHouse['id']; ?>" data-toggle="tab"
+                            href="#contact-<?php echo $oneHouse['id']; ?>" role="tab"
+                            aria-controls="contact-<?php echo $oneHouse['id']; ?>" aria-selected="false">Contact
+                            Vendor</a>
+                    </li>
+
+                    <!-- Property Images -->
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="img-tab-<?php echo $oneHouse['id']; ?>" data-toggle="tab"
+                            href="#img-<?php echo $oneHouse['id']; ?>" role="tab"
+                            aria-controls="img-<?php echo $oneHouse['id']; ?>" aria-selected="false">Property
+                            Images</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="house-<?php echo $oneHouse['id']; ?>" role="tabpanel"
+                        aria-labelledby="house-tab-<?php echo $oneHouse['id']; ?>">
+                        <p class="lead">
+                            Details: <?php echo $oneHouse['details']; ?>
+                        </p>
+
+                        <p class="lead"> Bedrooms:
+                            Bedrooms: <?php echo $oneHouse['bed'] ?>
+                        </p>
+
+                        <p class="lead">
+                            Parking Lot: <?php echo $oneHouse['parking'] ?>
+                        </p>
+
+                        <p class="lead">
+                            ID: <?php echo $oneHouse['id']; ?>
+                        </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="details-<?php echo $oneHouse['id']; ?>" role="tabpanel"
+                        aria-labelledby="details-tab-<?php echo $oneHouse['id']; ?>">
+                        <p class="lead">
+                            Details: <?php echo $oneHouse['details']; ?>
+                        </p>
+
+                        <p class="lead">
+                            Location: <?php echo $oneHouse['location'] ?>
+                        </p>
+                    </div>
+
+                    <div class="tab-pane fade" id="contact-<?php echo $oneHouse['id']; ?>" role="tabpanel"
+                        aria-labelledby="contact-tab">
+                        <?php 
+                            $vendorID = $oneHouse['vendor_id'];
+                            $getVendorDetails = "SELECT phone FROM vendors WHERE id = '$vendorID'";
+                            $rawData = $conn->query($getVendorDetails);
+                            $phoneNumber = $rawData->fetch_assoc();
+                        ?>
+
+                        <p class="lead">
+                            Phone Number: <?php echo $phoneNumber['phone']; ?>
+                        </p>
+                    </div>
+
+                    <!-- Images -->
+                    <div class="tab-pane fade" id="img-<?php echo $oneHouse['id']; ?>" role="tabpanel"
+                        aria-labelledby="img-tab-<?php echo $oneHouse['id']; ?>">
+                        <div class="container">
+                            <div class="row my-2">
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $oneHouse['id']; ?>"
+                                        href="../uploads/property-uploads/hall/<?php echo $oneHouse['hall']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/hall/<?php echo $oneHouse['hall']; ?>"
+                                            alt="Hall">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $oneHouse['id']; ?>"
+                                        href="../uploads/property-uploads/kitchen/<?php echo $oneHouse['kitchen']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/kitchen/<?php echo $oneHouse['kitchen']; ?>"
+                                            alt="Kitchen">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $oneHouse['id']; ?>"
+                                        href="../uploads/property-uploads/bedroom/<?php echo $oneHouse['bedroom']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/bedroom/<?php echo $oneHouse['bedroom']; ?>"
+                                            alt="Bedroom">
+                                    </a>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $oneHouse['id']; ?>"
+                                        href="../uploads/property-uploads/bathroom/<?php echo $oneHouse['bathroom']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/bathroom/<?php echo $oneHouse['bathroom']; ?>"
+                                            alt="Bathroom">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $oneHouse['id']; ?>"
+                                        href="../uploads/property-uploads/house/<?php echo $oneHouse['house']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/house/<?php echo $oneHouse['house']; ?>"
+                                            alt="House">
+                                    </a>
+                                </div>
+                                <div class="col-md-4">
+                                    <a data-fancybox="gallery-<?php echo $oneHouse['id']; ?>"
+                                        href="../uploads/property-uploads/property/<?php echo $oneHouse['property']; ?>">
+                                        <img class="img-fluid"
+                                            src="../uploads/property-uploads/property/<?php echo $oneHouse['property']; ?>"
+                                            alt="Property">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </section>
 
     <!-- counter up section -->
     <section class="">

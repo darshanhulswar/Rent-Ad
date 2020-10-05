@@ -1,6 +1,14 @@
 <?php include 'inc/dbconnection.inc.php'; ?>
-<?php $properties = "SELECT * FROM properties WHERE is_verified > 0 ORDER BY RAND() LIMIT 6"; ?>
+<?php   $properties = "SELECT * FROM properties WHERE is_verified > 0 ORDER BY time DESC LIMIT 3"; ?>
+<?php   $data = $conn->query($properties);
+        $finalHouseDetails = [];
+        foreach($data as $house) {
+        $finalHouseDetails[] = $house; 
 
+        }
+
+        // var_dump($finalHouseDetails);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,15 +50,15 @@
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active"><a href="index.php" class="nav-link">Home</a></li>
                     <li class="nav-item"><a href="properties.php" class="nav-link">Properties</a></li>
-                    <li class="nav-item"><a href="services.php" class="nav-link">Services</a></li>
+                    <li class="nav-item"><a href="vendor/index.php" class="nav-link">Vendor</a></li>
                     <li class="nav-item"><a href="about.php" class="nav-link">About Us</a></li>
                     <li class="nav-item"><a href="contact.php" class="nav-link">Contact Us</a></li>
                 </ul>
 
                 <!-- SignIn and SignOut Links -->
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item"><a href="signin.php" class="nav-link">Login</a></li>
-                    <li class="nav-item"><a href="signup.php" class="nav-link">Sign Up</a></li>
+                    <li class="nav-item"><a href="signin.php" class="nav-link">Signin</a></li>
+                    <li class="nav-item"><a href="signup.php" class="nav-link">Signup</a></li>
                 </ul>
 
             </div>
@@ -75,7 +83,6 @@
                             <p class="lead animated zoomIn delay-2s text-light">Rent-House Adviser offers a one-stop
                                 destination
                                 for all Property needs</p>
-                            <a href="#" class="btn btn-danger btn-lg animated zoomIn delay-3s">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -89,7 +96,6 @@
                                 uncover the
                                 hidden gems near you.
                             </p>
-                            <a href="#" class="btn btn-primary btn-lg animated zoomIn delay-3s">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -104,7 +110,6 @@
                             <p class="lead animated zoomIn delay-2s text-light">Search confidently with your trusted
                                 source of homes for sale or rent
                             </p>
-                            <a href="#" class="btn btn-success btn-lg animated zoomIn delay-3s">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -119,6 +124,15 @@
         </div>
     </section>
     <!--  Carousel End  -->
+
+    <section class="my-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6"></div>
+                <div class="col-md-6"></div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="bg-dark">
