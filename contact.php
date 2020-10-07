@@ -74,7 +74,7 @@
                         <div class="container m-5">
                             <ul class="lead py-3 list-unstyled">
                                 <li>Office <span class="span-strong">SDM College,</span> Honnavar</li>
-                                <li>Phone <span class="span-strong">+919483376591</span></li>
+                                <li>Phone <span class="span-strong">+91 1112 154 142</span></li>
                                 <li>e-mail <span class="span-strong">dhulswar591@gmail.com</span></li>
                                 <li>Working Hours <span class="span-strong">Mon-Sat at 9:00 Am - 5:00 Pm</span></li>
                             </ul>

@@ -125,15 +125,6 @@
     </section>
     <!--  Carousel End  -->
 
-    <section class="my-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6"></div>
-                <div class="col-md-6"></div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer -->
     <footer class="bg-dark">
         <div class="container">
